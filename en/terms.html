@@ -1,55 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms of Service</title>
-    <style>
-        body { font-family: sans-serif; line-height: 1.6; padding: 2em; }
-        h1, h3 { color: #333; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Service</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #10203A;
+    --panel: #16294A;
+    --panel-line: #2C4468;
+    --ink: #F1EEE4;
+    --ink-dim: #C7D0DE;
+    --line: #5D7FA3;
+    --accent: #E2622C;
+    --accent-dim: #B84E23;
+    --good: #4E9B6E;
+    --frame-margin: clamp(14px, 3vw, 34px);
+  }
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *{ animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  }
+  body{
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  a{ color: inherit; }
+  .mono{ font-family: "IBM Plex Mono", monospace; letter-spacing: 0.01em; }
+
+  .sheet{ position: relative; margin: var(--frame-margin); border: 1px solid var(--line); }
+  .tick{ position: absolute; width: 16px; height: 16px; pointer-events: none; }
+  .tick::before, .tick::after{ content: ""; position: absolute; background: var(--line); }
+  .tick::before{ width: 100%; height: 1px; top: 50%; left: 0; }
+  .tick::after{ width: 1px; height: 100%; left: 50%; top: 0; }
+  .tick.tl{ top: -8px; left: -8px; } .tick.tr{ top: -8px; right: -8px; }
+  .tick.bl{ bottom: -8px; left: -8px; } .tick.br{ bottom: -8px; right: -8px; }
+
+  .topbar{
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding: 22px clamp(20px, 4vw, 48px);
+    border-bottom: 1px solid var(--panel-line);
+  }
+  .wordmark{ font-family: "Big Shoulders Display", sans-serif; font-weight: 700; font-size: 21px; text-decoration: none; }
+  .topnav{ display: flex; align-items: center; gap: clamp(14px, 3vw, 30px); }
+  .topnav a{
+    font-size: 14px; text-decoration: none; color: var(--ink-dim);
+    border-bottom: 1px solid transparent; padding-bottom: 2px;
+    transition: color .15s ease, border-color .15s ease;
+  }
+  .topnav a:hover, .topnav a:focus-visible{ color: var(--ink); border-color: var(--accent); }
+  .topnav a.lang{ font-family: "IBM Plex Mono", monospace; font-size: 12.5px; border: 1px solid var(--panel-line); padding: 3px 8px; }
+  .topnav a.lang:hover, .topnav a.lang:focus-visible{ border-color: var(--accent); }
+
+  .btn{
+    display: inline-block; font-size: 14px; padding: 13px 22px; border: 1px solid var(--line);
+    text-decoration: none; color: var(--ink); background: transparent;
+    transition: border-color .15s ease, color .15s ease, background .15s ease;
+  }
+  .btn:hover, .btn:focus-visible{ border-color: var(--accent); color: var(--accent); }
+  .btn-primary{ border-color: var(--accent); background: var(--accent); color: var(--bg); font-weight: 600; }
+  .btn-primary:hover, .btn-primary:focus-visible{ background: var(--accent-dim); border-color: var(--accent-dim); color: var(--bg); }
+
+  footer{
+    padding: 22px clamp(20px, 4vw, 48px);
+    border-top: 1px solid var(--panel-line);
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;
+    font-size: 13px; color: var(--line);
+  }
+  footer nav{ display: flex; flex-wrap: wrap; gap: 8px 18px; }
+  footer a{ text-decoration: underline; text-decoration-color: var(--panel-line); text-underline-offset: 3px; }
+  footer a:hover, footer a:focus-visible{ text-decoration-color: var(--accent); color: var(--accent); }
+  :focus-visible{ outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* ---------- documento ---------- */
+  .doc{ padding: clamp(36px, 6vw, 72px) clamp(20px, 4vw, 48px) clamp(48px, 7vw, 80px); }
+  .doc-inner{ max-width: 72ch; }
+  .doc h1, .doc h2, .doc h3{ font-family: "Big Shoulders Display", "IBM Plex Sans", sans-serif; font-weight: 700; line-height: 1.1; }
+  .doc h1{ font-size: clamp(2rem, 4vw, 2.9rem); margin: 0 0 14px; }
+  .doc h2, .doc h3{ font-size: clamp(1.3rem, 2.4vw, 1.6rem); margin: 38px 0 12px; padding-top: 18px; border-top: 1px solid var(--panel-line); }
+  .doc p, .doc li{ color: var(--ink-dim); font-size: 15.5px; }
+  .doc p{ margin: 0 0 14px; }
+  .doc ul, .doc ol{ margin: 0 0 16px; padding-left: 22px; }
+  .doc li{ margin-bottom: 8px; }
+  .doc li > ul{ margin-top: 8px; }
+  .doc strong{ color: var(--ink); font-weight: 600; }
+  .doc em{ font-style: normal; }
+  .doc code{ font-family: "IBM Plex Mono", monospace; font-size: 13.5px; color: var(--ink); background: var(--panel); padding: 1px 6px; }
+  .doc a:not(.btn){ color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .doc .doc-date{ font-family: "IBM Plex Mono", monospace; font-size: 13px; color: var(--line); margin-bottom: 30px; }
+  .doc .doc-date strong{ color: var(--line); font-weight: 500; }
+  .doc p.action{ margin: 22px 0 26px; }
+
+  /* ---------- FAQ (Auto Workshop) ---------- */
+  .faq{ display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+  .faq details{ border: 1px solid var(--panel-line); background: var(--panel); }
+  .faq summary{
+    cursor: pointer; list-style: none; padding: 16px 22px; font-weight: 600; font-size: 15px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .faq summary::-webkit-details-marker{ display: none; }
+  .faq summary::after{ content: "+"; margin-left: auto; font-family: "IBM Plex Mono", monospace; color: var(--accent); }
+  .faq details[open] summary::after{ content: "−"; }
+  .faq details[open] summary{ border-bottom: 1px solid var(--panel-line); }
+  .faq .answer{ padding: 14px 22px 18px; font-size: 15px; color: var(--ink-dim); }
+  .badge{ font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 500; color: var(--accent); border: 1px solid var(--accent-dim); padding: 1px 7px; }
+  .doc .cta-end{ margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--panel-line); }
+  .doc .cta-end h2{ border: 0; padding: 0; margin: 0 0 10px; }
+
+  @media (max-width: 560px){
+    .topnav a.back{ display: none; }
+  }
+</style>
 </head>
 <body>
 
-    <h1>Terms of Service for Vocalize</h1>
+<div class="sheet">
+  <span class="tick tl"></span><span class="tick tr"></span>
+  <span class="tick bl"></span><span class="tick br"></span>
 
-    <p><strong>Last updated:</strong> 17/10/2026</p>
+  <header class="topbar">
+    <a class="wordmark" href="./">Vocalize</a>
+    <nav class="topnav">
+      <a class="back" href="./">← Back to home</a>
+      <a href="faq.html">FAQ</a>
+      <a class="lang" href="../it/terms.html" hreflang="it" lang="it">IT</a>
+    </nav>
+  </header>
 
-    <p>Welcome to Vocalize! These Terms of Service ("Terms") govern your use of our mobile application ("Service"). Please read them carefully before using the app.</p>
+  <main class="doc">
+    <div class="doc-inner">
+      <h1>Terms of Service for Vocalize</h1>
 
-    <p>By accessing or using our Service, you agree to be bound by these Terms.</p>
+      <p class="doc-date"><strong>Last updated:</strong> 17/10/2026</p>
 
-    <h3>1. Service Description</h3>
-    <p>Vocalize is a software application that provides Text-to-Speech (TTS) services. The Service allows users to convert text into audio, import content from files and web pages, and create and manage personal audiobook projects.</p>
+      <p>Welcome to Vocalize! These Terms of Service ("Terms") govern your use of our mobile application ("Service"). Please read them carefully before using the app.</p>
 
-    <h3>2. Usage Plans & Features</h3>
-    <p>Our Service is offered under two plans: "Free" and "Premium".</p>
-    <ul>
-      <li><strong>Free Plan:</strong> Access to Standard and WaveNet voices, a monthly credit budget for synthesis, a quota of trial credits for premium voices, the creation of one audiobook, and presence of third-party ads.</li>
-      <li><strong>Premium Plan (requires an active subscription):</strong> Access to all features, including unlimited audiobook creation, access to all available voices including "Studio" quality voices, a higher monthly credit budget, and no ads.</li>
-    </ul>
+      <p>By accessing or using our Service, you agree to be bound by these Terms.</p>
 
-    <h3>3. Offers and Trial Periods</h3>
-    <p>Any free trial periods or introductory offers for the Premium Plan are shown in the Google Play Store or the Apple App Store at the time of purchase, together with their duration and conditions. At the end of a trial or offer, the subscription automatically renews at the chosen plan's price unless canceled before the expiration date through your store settings.</p>
+      <h3>1. Service Description</h3>
+      <p>Vocalize is a software application that provides Text-to-Speech (TTS) services. The Service allows users to convert text into audio, import content from files and web pages, and create and manage personal audiobook projects.</p>
 
-    <h3>4. Subscriptions, Payments, and Renewals</h3>
-    <p>Subscriptions to the Premium Plan are managed, billed, and charged by Google (for Android) and Apple (for iOS). All subscriptions automatically renew at the end of the billing period unless deactivated. You can cancel the auto-renewal at any time directly from your Google Play or App Store account's subscription settings.</p>
+      <h3>2. Usage Plans & Features</h3>
+      <p>Our Service is offered under two plans: "Free" and "Premium".</p>
+      <ul>
+        <li><strong>Free Plan:</strong> Access to Standard and WaveNet voices, a monthly credit budget for synthesis, a quota of trial credits for premium voices, the creation of one audiobook, and presence of third-party ads.</li>
+        <li><strong>Premium Plan (requires an active subscription):</strong> Access to all features, including unlimited audiobook creation, access to all available voices including "Studio" quality voices, a higher monthly credit budget, and no ads.</li>
+      </ul>
 
-    <h3>5. Credit System</h3>
-    <p>The Service is based on a credit system consumed during speech synthesis. Each voice type has a different credit cost, as indicated in the app. Users on the Free and Premium plans are allocated a monthly credit quota. Unused credits do not roll over and are reset upon monthly renewal. To ensure fair use of the Service, daily and per-minute usage limits also apply, and they may vary by plan.</p>
+      <h3>3. Offers and Trial Periods</h3>
+      <p>Any free trial periods or introductory offers for the Premium Plan are shown in the Google Play Store or the Apple App Store at the time of purchase, together with their duration and conditions. At the end of a trial or offer, the subscription automatically renews at the chosen plan's price unless canceled before the expiration date through your store settings.</p>
 
-    <h3>6. Acceptable Use</h3>
-    <p>You agree not to use the Service to create, save, or distribute illegal, offensive, defamatory, or rights-violating content, including copyright infringement. You are solely responsible for the text you provide to the Service for synthesis.</p>
+      <h3>4. Subscriptions, Payments, and Renewals</h3>
+      <p>Subscriptions to the Premium Plan are managed, billed, and charged by Google (for Android) and Apple (for iOS). All subscriptions automatically renew at the end of the billing period unless deactivated. You can cancel the auto-renewal at any time directly from your Google Play or App Store account's subscription settings.</p>
 
-    <h3>7. Intellectual Property</h3>
-    <p>All rights to the Vocalize application, its code, design, and brand are our exclusive property. You retain full ownership and all rights to the text you input and the audio files you generate through the Service.</p>
+      <h3>5. Credit System</h3>
+      <p>The Service is based on a credit system consumed during speech synthesis. Each voice type has a different credit cost, as indicated in the app. Users on the Free and Premium plans are allocated a monthly credit quota. Unused credits do not roll over and are reset upon monthly renewal. To ensure fair use of the Service, daily and per-minute usage limits also apply, and they may vary by plan.</p>
 
-    <h3>8. Limitation of Liability</h3>
-    <p>The Service is provided "as is". We do not guarantee that the Service will always be available, error-free, or meet all your needs. To the maximum extent permitted by law, we shall not be liable for any direct or indirect damages arising from the use of or inability to use our Service.</p>
+      <h3>6. Acceptable Use</h3>
+      <p>You agree not to use the Service to create, save, or distribute illegal, offensive, defamatory, or rights-violating content, including copyright infringement. You are solely responsible for the text you provide to the Service for synthesis.</p>
 
-    <h3>9. Changes to Terms</h3>
-    <p>We reserve the right to modify these Terms at any time. In the event of substantial changes, we will make an effort to notify you. Continued use of the Service after such changes constitutes acceptance of the new Terms.</p>
+      <h3>7. Intellectual Property</h3>
+      <p>All rights to the Vocalize application, its code, design, and brand are our exclusive property. You retain full ownership and all rights to the text you input and the audio files you generate through the Service.</p>
+
+      <h3>8. Limitation of Liability</h3>
+      <p>The Service is provided "as is". We do not guarantee that the Service will always be available, error-free, or meet all your needs. To the maximum extent permitted by law, we shall not be liable for any direct or indirect damages arising from the use of or inability to use our Service.</p>
+
+      <h3>9. Changes to Terms</h3>
+      <p>We reserve the right to modify these Terms at any time. In the event of substantial changes, we will make an effort to notify you. Continued use of the Service after such changes constitutes acceptance of the new Terms.</p>
+    </div>
+  </main>
+
+  <footer>
+    <span>&copy; 2026 Vocalize</span>
+    <nav>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="delete.html">Account deletion</a>
+    </nav>
+    <span>A project by <a href="https://klleshi.com/">Kastriot Lleshi</a></span>
+  </footer>
+</div>
 
 </body>
 </html>
-

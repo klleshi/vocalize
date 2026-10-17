@@ -1,84 +1,225 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy</title>
-    <style>
-        body { font-family: sans-serif; line-height: 1.6; padding: 2em; }
-        h1, h3 { color: #333; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #10203A;
+    --panel: #16294A;
+    --panel-line: #2C4468;
+    --ink: #F1EEE4;
+    --ink-dim: #C7D0DE;
+    --line: #5D7FA3;
+    --accent: #E2622C;
+    --accent-dim: #B84E23;
+    --good: #4E9B6E;
+    --frame-margin: clamp(14px, 3vw, 34px);
+  }
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *{ animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  }
+  body{
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  a{ color: inherit; }
+  .mono{ font-family: "IBM Plex Mono", monospace; letter-spacing: 0.01em; }
+
+  .sheet{ position: relative; margin: var(--frame-margin); border: 1px solid var(--line); }
+  .tick{ position: absolute; width: 16px; height: 16px; pointer-events: none; }
+  .tick::before, .tick::after{ content: ""; position: absolute; background: var(--line); }
+  .tick::before{ width: 100%; height: 1px; top: 50%; left: 0; }
+  .tick::after{ width: 1px; height: 100%; left: 50%; top: 0; }
+  .tick.tl{ top: -8px; left: -8px; } .tick.tr{ top: -8px; right: -8px; }
+  .tick.bl{ bottom: -8px; left: -8px; } .tick.br{ bottom: -8px; right: -8px; }
+
+  .topbar{
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding: 22px clamp(20px, 4vw, 48px);
+    border-bottom: 1px solid var(--panel-line);
+  }
+  .wordmark{ font-family: "Big Shoulders Display", sans-serif; font-weight: 700; font-size: 21px; text-decoration: none; }
+  .topnav{ display: flex; align-items: center; gap: clamp(14px, 3vw, 30px); }
+  .topnav a{
+    font-size: 14px; text-decoration: none; color: var(--ink-dim);
+    border-bottom: 1px solid transparent; padding-bottom: 2px;
+    transition: color .15s ease, border-color .15s ease;
+  }
+  .topnav a:hover, .topnav a:focus-visible{ color: var(--ink); border-color: var(--accent); }
+  .topnav a.lang{ font-family: "IBM Plex Mono", monospace; font-size: 12.5px; border: 1px solid var(--panel-line); padding: 3px 8px; }
+  .topnav a.lang:hover, .topnav a.lang:focus-visible{ border-color: var(--accent); }
+
+  .btn{
+    display: inline-block; font-size: 14px; padding: 13px 22px; border: 1px solid var(--line);
+    text-decoration: none; color: var(--ink); background: transparent;
+    transition: border-color .15s ease, color .15s ease, background .15s ease;
+  }
+  .btn:hover, .btn:focus-visible{ border-color: var(--accent); color: var(--accent); }
+  .btn-primary{ border-color: var(--accent); background: var(--accent); color: var(--bg); font-weight: 600; }
+  .btn-primary:hover, .btn-primary:focus-visible{ background: var(--accent-dim); border-color: var(--accent-dim); color: var(--bg); }
+
+  footer{
+    padding: 22px clamp(20px, 4vw, 48px);
+    border-top: 1px solid var(--panel-line);
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;
+    font-size: 13px; color: var(--line);
+  }
+  footer nav{ display: flex; flex-wrap: wrap; gap: 8px 18px; }
+  footer a{ text-decoration: underline; text-decoration-color: var(--panel-line); text-underline-offset: 3px; }
+  footer a:hover, footer a:focus-visible{ text-decoration-color: var(--accent); color: var(--accent); }
+  :focus-visible{ outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* ---------- documento ---------- */
+  .doc{ padding: clamp(36px, 6vw, 72px) clamp(20px, 4vw, 48px) clamp(48px, 7vw, 80px); }
+  .doc-inner{ max-width: 72ch; }
+  .doc h1, .doc h2, .doc h3{ font-family: "Big Shoulders Display", "IBM Plex Sans", sans-serif; font-weight: 700; line-height: 1.1; }
+  .doc h1{ font-size: clamp(2rem, 4vw, 2.9rem); margin: 0 0 14px; }
+  .doc h2, .doc h3{ font-size: clamp(1.3rem, 2.4vw, 1.6rem); margin: 38px 0 12px; padding-top: 18px; border-top: 1px solid var(--panel-line); }
+  .doc p, .doc li{ color: var(--ink-dim); font-size: 15.5px; }
+  .doc p{ margin: 0 0 14px; }
+  .doc ul, .doc ol{ margin: 0 0 16px; padding-left: 22px; }
+  .doc li{ margin-bottom: 8px; }
+  .doc li > ul{ margin-top: 8px; }
+  .doc strong{ color: var(--ink); font-weight: 600; }
+  .doc em{ font-style: normal; }
+  .doc code{ font-family: "IBM Plex Mono", monospace; font-size: 13.5px; color: var(--ink); background: var(--panel); padding: 1px 6px; }
+  .doc a:not(.btn){ color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .doc .doc-date{ font-family: "IBM Plex Mono", monospace; font-size: 13px; color: var(--line); margin-bottom: 30px; }
+  .doc .doc-date strong{ color: var(--line); font-weight: 500; }
+  .doc p.action{ margin: 22px 0 26px; }
+
+  /* ---------- FAQ (Auto Workshop) ---------- */
+  .faq{ display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+  .faq details{ border: 1px solid var(--panel-line); background: var(--panel); }
+  .faq summary{
+    cursor: pointer; list-style: none; padding: 16px 22px; font-weight: 600; font-size: 15px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .faq summary::-webkit-details-marker{ display: none; }
+  .faq summary::after{ content: "+"; margin-left: auto; font-family: "IBM Plex Mono", monospace; color: var(--accent); }
+  .faq details[open] summary::after{ content: "−"; }
+  .faq details[open] summary{ border-bottom: 1px solid var(--panel-line); }
+  .faq .answer{ padding: 14px 22px 18px; font-size: 15px; color: var(--ink-dim); }
+  .badge{ font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 500; color: var(--accent); border: 1px solid var(--accent-dim); padding: 1px 7px; }
+  .doc .cta-end{ margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--panel-line); }
+  .doc .cta-end h2{ border: 0; padding: 0; margin: 0 0 10px; }
+
+  @media (max-width: 560px){
+    .topnav a.back{ display: none; }
+  }
+</style>
 </head>
 <body>
 
-    <h1>Privacy Policy for Vocalize</h1>
+<div class="sheet">
+  <span class="tick tl"></span><span class="tick tr"></span>
+  <span class="tick bl"></span><span class="tick br"></span>
 
-    <p><strong>Last updated:</strong> 17/10/2026</p>
+  <header class="topbar">
+    <a class="wordmark" href="./">Vocalize</a>
+    <nav class="topnav">
+      <a class="back" href="./">← Back to home</a>
+      <a href="faq.html">FAQ</a>
+      <a class="lang" href="../it/privacy.html" hreflang="it" lang="it">IT</a>
+    </nav>
+  </header>
 
-    <p>Thank you for choosing to use Vocalize, our App. Your privacy is very important to us. This privacy policy explains what data we collect, how we use it, and what your rights are in relation to it.</p>
+  <main class="doc">
+    <div class="doc-inner">
+      <h1>Privacy Policy for Vocalize</h1>
 
-    <p>By using our application, you agree to the collection and use of information in accordance with this policy.</p>
+      <p class="doc-date"><strong>Last updated:</strong> 17/10/2026</p>
 
-    <h3>1. Data Controller</h3>
-    <p>The controller for the personal data collected through this application is:</p>
-    <p>Kastriot Lleshi<br>
-    <strong>Contact Email:</strong> klleshi99@gmail.com</p>
+      <p>Thank you for choosing to use Vocalize, our App. Your privacy is very important to us. This privacy policy explains what data we collect, how we use it, and what your rights are in relation to it.</p>
 
-    <h3>2. Types of Data Collected</h3>
-    <p>To provide our service, we collect the following types of information.</p>
-    <ul>
-      <li><strong>Data Provided by You:</strong>
-        <ul>
-          <li><strong>Text for speech synthesis:</strong> The text you enter, paste, or import from files (TXT, PDF) and web pages is sent to a function on our Google Cloud servers in the European Union, which passes it to Google Cloud Text-to-Speech and returns the audio. The text is neither stored nor logged. If an error occurs, we only log the account identifier, the voice used and the type of error.</li>
-          <li><strong>Account information (for registered users):</strong> If you link your account with Google or Apple, we receive your name, email address (or the relay address provided by Apple, if you choose to hide your email) and a unique identifier.</li>
-        </ul>
-      </li>
-      <li><strong>Data Collected Automatically:</strong>
-        <ul>
-          <li><strong>Anonymous account and Unique User ID:</strong> On first launch the app creates an anonymous account through Firebase Authentication, with no name or email. Its unique identifier links your plan and credits to your device and stays the same if you link a Google or Apple account.</li>
-          <li><strong>Plan and credit data:</strong> In our database (Cloud Firestore, in the European Union) we store for each account: plan (free or Premium), available credits, registration date and date of the last monthly top-up, subscription expiry and usage counters (daily and per minute) used to enforce the service limits.</li>
-          <li><strong>App verification (App Check):</strong> To prevent the service from being used by non-genuine apps, the app obtains a device attestation through Google Play Integrity (Android) or Apple App Attest and DeviceCheck (iOS). The attestation contains no personal data.</li>
-          <li><strong>Remote configuration:</strong> The app uses Firebase Remote Config and Firebase Installations to know whether a mandatory update is available.</li>
-        </ul>
-      </li>
-    </ul>
+      <p>By using our application, you agree to the collection and use of information in accordance with this policy.</p>
 
-    <h3>3. Data That Stays on Your Device</h3>
-    <ul>
-      <li><strong>Audio and audiobooks:</strong> The audio files you save and your audiobooks stay only on your phone and are never sent to us. They are removed when you delete them in the app or uninstall it.</li>
-      <li><strong>Language detection:</strong> Automatic detection of the text's language runs on your phone with Google ML Kit: the text is not sent anywhere for this feature.</li>
-    </ul>
+      <h3>1. Data Controller</h3>
+      <p>The controller for the personal data collected through this application is:</p>
+      <p>Kastriot Lleshi<br>
+      <strong>Contact Email:</strong> klleshi99@gmail.com</p>
 
-    <h3>4. Purpose of Data Processing</h3>
-    <p>We use the collected data for the following purposes:</p>
-    <ul>
-      <li><strong>To provide and maintain our service:</strong> To convert text to audio and to apply the credits and usage limits of your plan.</li>
-      <li><strong>To manage your account:</strong> To create and manage your user account (anonymous or linked to Google or Apple) and to restore your plan and credits on a new device.</li>
-      <li><strong>To manage subscriptions and payments:</strong> To process your purchases for the Premium plan through the official stores. An anonymous identifier of your account is passed to the store to link the subscription to your plan.</li>
-      <li><strong>To display advertising:</strong> For users of the free plan, we display ads to support the service.</li>
-      <li><strong>To protect the service:</strong> To verify that requests come from the genuine app and to prevent abuse.</li>
-    </ul>
+      <h3>2. Types of Data Collected</h3>
+      <p>To provide our service, we collect the following types of information.</p>
+      <ul>
+        <li><strong>Data Provided by You:</strong>
+          <ul>
+            <li><strong>Text for speech synthesis:</strong> The text you enter, paste, or import from files (TXT, PDF) and web pages is sent to a function on our Google Cloud servers in the European Union, which passes it to Google Cloud Text-to-Speech and returns the audio. The text is neither stored nor logged. If an error occurs, we only log the account identifier, the voice used and the type of error.</li>
+            <li><strong>Account information (for registered users):</strong> If you link your account with Google or Apple, we receive your name, email address (or the relay address provided by Apple, if you choose to hide your email) and a unique identifier.</li>
+          </ul>
+        </li>
+        <li><strong>Data Collected Automatically:</strong>
+          <ul>
+            <li><strong>Anonymous account and Unique User ID:</strong> On first launch the app creates an anonymous account through Firebase Authentication, with no name or email. Its unique identifier links your plan and credits to your device and stays the same if you link a Google or Apple account.</li>
+            <li><strong>Plan and credit data:</strong> In our database (Cloud Firestore, in the European Union) we store for each account: plan (free or Premium), available credits, registration date and date of the last monthly top-up, subscription expiry and usage counters (daily and per minute) used to enforce the service limits.</li>
+            <li><strong>App verification (App Check):</strong> To prevent the service from being used by non-genuine apps, the app obtains a device attestation through Google Play Integrity (Android) or Apple App Attest and DeviceCheck (iOS). The attestation contains no personal data.</li>
+            <li><strong>Remote configuration:</strong> The app uses Firebase Remote Config and Firebase Installations to know whether a mandatory update is available.</li>
+          </ul>
+        </li>
+      </ul>
 
-    <h3>5. Third-Party Services</h3>
-    <p>Our app uses services provided by third parties to function. Each of these services has its own privacy policy.</p>
-    <ul>
-      <li><strong>Google Cloud Text-to-Speech:</strong> Used for speech synthesis. The text you provide is sent to Google to be processed.</li>
-      <li><strong>Firebase (by Google):</strong> Firebase Authentication, Cloud Firestore, Cloud Functions, App Check, Remote Config and Installations.</li>
-      <li><strong>Google Play Integrity and Apple App Attest / DeviceCheck:</strong> To verify that the app is genuine.</li>
-      <li><strong>Google Sign-In and Sign in with Apple:</strong> If you choose to link your account.</li>
-      <li><strong>Google ML Kit:</strong> For language detection, performed on the device.</li>
-      <li><strong>AdMob (by Google):</strong> To display ads to free plan users. Consent to personalised ads is collected through Google's consent form and can be changed at any time in the app, under Information → Privacy Preferences (Advertising).</li>
-      <li><strong>Google Play Billing & Apple In-App Purchases:</strong> To securely manage subscriptions and payments. We never have access to your credit card data.</li>
-    </ul>
+      <h3>3. Data That Stays on Your Device</h3>
+      <ul>
+        <li><strong>Audio and audiobooks:</strong> The audio files you save and your audiobooks stay only on your phone and are never sent to us. They are removed when you delete them in the app or uninstall it.</li>
+        <li><strong>Language detection:</strong> Automatic detection of the text's language runs on your phone with Google ML Kit: the text is not sent anywhere for this feature.</li>
+      </ul>
 
-    <h3>6. Data Retention</h3>
-    <p>Your account data (plan, credits, dates and usage counters) is kept for as long as the account exists or until you ask for it to be deleted. Technical error logs are kept for a limited period, normally up to 30 days.</p>
+      <h3>4. Purpose of Data Processing</h3>
+      <p>We use the collected data for the following purposes:</p>
+      <ul>
+        <li><strong>To provide and maintain our service:</strong> To convert text to audio and to apply the credits and usage limits of your plan.</li>
+        <li><strong>To manage your account:</strong> To create and manage your user account (anonymous or linked to Google or Apple) and to restore your plan and credits on a new device.</li>
+        <li><strong>To manage subscriptions and payments:</strong> To process your purchases for the Premium plan through the official stores. An anonymous identifier of your account is passed to the store to link the subscription to your plan.</li>
+        <li><strong>To display advertising:</strong> For users of the free plan, we display ads to support the service.</li>
+        <li><strong>To protect the service:</strong> To verify that requests come from the genuine app and to prevent abuse.</li>
+      </ul>
 
-    <h3>7. User Rights</h3>
-    <p>You have the right to access, modify, or delete your personal data. For any request regarding your data, you can contact us at the email address provided in this policy. To delete your account and the associated data, follow the instructions on the <a href="delete.html">account deletion</a> page.</p>
+      <h3>5. Third-Party Services</h3>
+      <p>Our app uses services provided by third parties to function. Each of these services has its own privacy policy.</p>
+      <ul>
+        <li><strong>Google Cloud Text-to-Speech:</strong> Used for speech synthesis. The text you provide is sent to Google to be processed.</li>
+        <li><strong>Firebase (by Google):</strong> Firebase Authentication, Cloud Firestore, Cloud Functions, App Check, Remote Config and Installations.</li>
+        <li><strong>Google Play Integrity and Apple App Attest / DeviceCheck:</strong> To verify that the app is genuine.</li>
+        <li><strong>Google Sign-In and Sign in with Apple:</strong> If you choose to link your account.</li>
+        <li><strong>Google ML Kit:</strong> For language detection, performed on the device.</li>
+        <li><strong>AdMob (by Google):</strong> To display ads to free plan users. Consent to personalised ads is collected through Google's consent form and can be changed at any time in the app, under Information → Privacy Preferences (Advertising).</li>
+        <li><strong>Google Play Billing & Apple In-App Purchases:</strong> To securely manage subscriptions and payments. We never have access to your credit card data.</li>
+      </ul>
 
-    <h3>8. Changes to This Privacy Policy</h3>
-    <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page. You are advised to review this page periodically for any changes.</p>
+      <h3>6. Data Retention</h3>
+      <p>Your account data (plan, credits, dates and usage counters) is kept for as long as the account exists or until you ask for it to be deleted. Technical error logs are kept for a limited period, normally up to 30 days.</p>
+
+      <h3>7. User Rights</h3>
+      <p>You have the right to access, modify, or delete your personal data. For any request regarding your data, you can contact us at the email address provided in this policy. To delete your account and the associated data, follow the instructions on the <a href="delete.html">account deletion</a> page.</p>
+
+      <h3>8. Changes to This Privacy Policy</h3>
+      <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page. You are advised to review this page periodically for any changes.</p>
+    </div>
+  </main>
+
+  <footer>
+    <span>&copy; 2026 Vocalize</span>
+    <nav>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="delete.html">Account deletion</a>
+    </nav>
+    <span>A project by <a href="https://klleshi.com/">Kastriot Lleshi</a></span>
+  </footer>
+</div>
 
 </body>
 </html>

@@ -1,84 +1,225 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Informativa sulla Privacy</title>
-    <style>
-        body { font-family: sans-serif; line-height: 1.6; padding: 2em; }
-        h1, h3 { color: #333; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Informativa sulla Privacy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #10203A;
+    --panel: #16294A;
+    --panel-line: #2C4468;
+    --ink: #F1EEE4;
+    --ink-dim: #C7D0DE;
+    --line: #5D7FA3;
+    --accent: #E2622C;
+    --accent-dim: #B84E23;
+    --good: #4E9B6E;
+    --frame-margin: clamp(14px, 3vw, 34px);
+  }
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *{ animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  }
+  body{
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  a{ color: inherit; }
+  .mono{ font-family: "IBM Plex Mono", monospace; letter-spacing: 0.01em; }
+
+  .sheet{ position: relative; margin: var(--frame-margin); border: 1px solid var(--line); }
+  .tick{ position: absolute; width: 16px; height: 16px; pointer-events: none; }
+  .tick::before, .tick::after{ content: ""; position: absolute; background: var(--line); }
+  .tick::before{ width: 100%; height: 1px; top: 50%; left: 0; }
+  .tick::after{ width: 1px; height: 100%; left: 50%; top: 0; }
+  .tick.tl{ top: -8px; left: -8px; } .tick.tr{ top: -8px; right: -8px; }
+  .tick.bl{ bottom: -8px; left: -8px; } .tick.br{ bottom: -8px; right: -8px; }
+
+  .topbar{
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding: 22px clamp(20px, 4vw, 48px);
+    border-bottom: 1px solid var(--panel-line);
+  }
+  .wordmark{ font-family: "Big Shoulders Display", sans-serif; font-weight: 700; font-size: 21px; text-decoration: none; }
+  .topnav{ display: flex; align-items: center; gap: clamp(14px, 3vw, 30px); }
+  .topnav a{
+    font-size: 14px; text-decoration: none; color: var(--ink-dim);
+    border-bottom: 1px solid transparent; padding-bottom: 2px;
+    transition: color .15s ease, border-color .15s ease;
+  }
+  .topnav a:hover, .topnav a:focus-visible{ color: var(--ink); border-color: var(--accent); }
+  .topnav a.lang{ font-family: "IBM Plex Mono", monospace; font-size: 12.5px; border: 1px solid var(--panel-line); padding: 3px 8px; }
+  .topnav a.lang:hover, .topnav a.lang:focus-visible{ border-color: var(--accent); }
+
+  .btn{
+    display: inline-block; font-size: 14px; padding: 13px 22px; border: 1px solid var(--line);
+    text-decoration: none; color: var(--ink); background: transparent;
+    transition: border-color .15s ease, color .15s ease, background .15s ease;
+  }
+  .btn:hover, .btn:focus-visible{ border-color: var(--accent); color: var(--accent); }
+  .btn-primary{ border-color: var(--accent); background: var(--accent); color: var(--bg); font-weight: 600; }
+  .btn-primary:hover, .btn-primary:focus-visible{ background: var(--accent-dim); border-color: var(--accent-dim); color: var(--bg); }
+
+  footer{
+    padding: 22px clamp(20px, 4vw, 48px);
+    border-top: 1px solid var(--panel-line);
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;
+    font-size: 13px; color: var(--line);
+  }
+  footer nav{ display: flex; flex-wrap: wrap; gap: 8px 18px; }
+  footer a{ text-decoration: underline; text-decoration-color: var(--panel-line); text-underline-offset: 3px; }
+  footer a:hover, footer a:focus-visible{ text-decoration-color: var(--accent); color: var(--accent); }
+  :focus-visible{ outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* ---------- documento ---------- */
+  .doc{ padding: clamp(36px, 6vw, 72px) clamp(20px, 4vw, 48px) clamp(48px, 7vw, 80px); }
+  .doc-inner{ max-width: 72ch; }
+  .doc h1, .doc h2, .doc h3{ font-family: "Big Shoulders Display", "IBM Plex Sans", sans-serif; font-weight: 700; line-height: 1.1; }
+  .doc h1{ font-size: clamp(2rem, 4vw, 2.9rem); margin: 0 0 14px; }
+  .doc h2, .doc h3{ font-size: clamp(1.3rem, 2.4vw, 1.6rem); margin: 38px 0 12px; padding-top: 18px; border-top: 1px solid var(--panel-line); }
+  .doc p, .doc li{ color: var(--ink-dim); font-size: 15.5px; }
+  .doc p{ margin: 0 0 14px; }
+  .doc ul, .doc ol{ margin: 0 0 16px; padding-left: 22px; }
+  .doc li{ margin-bottom: 8px; }
+  .doc li > ul{ margin-top: 8px; }
+  .doc strong{ color: var(--ink); font-weight: 600; }
+  .doc em{ font-style: normal; }
+  .doc code{ font-family: "IBM Plex Mono", monospace; font-size: 13.5px; color: var(--ink); background: var(--panel); padding: 1px 6px; }
+  .doc a:not(.btn){ color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .doc .doc-date{ font-family: "IBM Plex Mono", monospace; font-size: 13px; color: var(--line); margin-bottom: 30px; }
+  .doc .doc-date strong{ color: var(--line); font-weight: 500; }
+  .doc p.action{ margin: 22px 0 26px; }
+
+  /* ---------- FAQ (Auto Workshop) ---------- */
+  .faq{ display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+  .faq details{ border: 1px solid var(--panel-line); background: var(--panel); }
+  .faq summary{
+    cursor: pointer; list-style: none; padding: 16px 22px; font-weight: 600; font-size: 15px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .faq summary::-webkit-details-marker{ display: none; }
+  .faq summary::after{ content: "+"; margin-left: auto; font-family: "IBM Plex Mono", monospace; color: var(--accent); }
+  .faq details[open] summary::after{ content: "−"; }
+  .faq details[open] summary{ border-bottom: 1px solid var(--panel-line); }
+  .faq .answer{ padding: 14px 22px 18px; font-size: 15px; color: var(--ink-dim); }
+  .badge{ font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 500; color: var(--accent); border: 1px solid var(--accent-dim); padding: 1px 7px; }
+  .doc .cta-end{ margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--panel-line); }
+  .doc .cta-end h2{ border: 0; padding: 0; margin: 0 0 10px; }
+
+  @media (max-width: 560px){
+    .topnav a.back{ display: none; }
+  }
+</style>
 </head>
 <body>
 
-    <h1>Informativa sulla Privacy di Vocalize</h1>
+<div class="sheet">
+  <span class="tick tl"></span><span class="tick tr"></span>
+  <span class="tick bl"></span><span class="tick br"></span>
 
-    <p><strong>Ultimo aggiornamento:</strong> 17/10/2026</p>
+  <header class="topbar">
+    <a class="wordmark" href="../">Vocalize</a>
+    <nav class="topnav">
+      <a class="back" href="../">← Torna alla home</a>
+      <a href="../faq.html">FAQ</a>
+      <a class="lang" href="../en/privacy.html" hreflang="en" lang="en">EN</a>
+    </nav>
+  </header>
 
-    <p>Grazie per aver scelto di utilizzare Vocalize, la nostra App. La tua privacy è molto importante per noi. Questa informativa sulla privacy spiega quali dati raccogliamo, come li usiamo e quali sono i tuoi diritti in relazione ad essi.</p>
+  <main class="doc">
+    <div class="doc-inner">
+      <h1>Informativa sulla Privacy di Vocalize</h1>
 
-    <p>Utilizzando la nostra applicazione, accetti la raccolta e l'uso delle informazioni in conformità con questa policy.</p>
+      <p class="doc-date"><strong>Ultimo aggiornamento:</strong> 17/10/2026</p>
 
-    <h3>1. Titolare del Trattamento dei Dati</h3>
-    <p>Il titolare del trattamento dei dati personali raccolti tramite questa applicazione è:</p>
-    <p>Kastriot Lleshi<br>
-    <strong>Indirizzo Email di Contatto:</strong> klleshi99@gmail.com</p>
+      <p>Grazie per aver scelto di utilizzare Vocalize, la nostra App. La tua privacy è molto importante per noi. Questa informativa sulla privacy spiega quali dati raccogliamo, come li usiamo e quali sono i tuoi diritti in relazione ad essi.</p>
 
-    <h3>2. Tipi di Dati Raccolti</h3>
-    <p>Per fornire il nostro servizio raccogliamo i seguenti tipi di informazioni.</p>
-    <ul>
-      <li><strong>Dati forniti dall'utente:</strong>
-        <ul>
-          <li><strong>Testo per la sintesi vocale:</strong> Il testo che inserisci, incolli o importi da file (TXT, PDF) e pagine web viene inviato a una funzione sui nostri server Google Cloud nell'Unione europea, che lo trasmette a Google Cloud Text-to-Speech e restituisce l'audio. Il testo non viene conservato né registrato. In caso di errore registriamo solo l'identificativo dell'account, la voce usata e il tipo di errore.</li>
-          <li><strong>Informazioni dell'account (per utenti registrati):</strong> Se colleghi il tuo account con Google o con Apple, riceviamo nome, indirizzo email (oppure l'indirizzo di inoltro fornito da Apple, se scegli di nascondere la tua email) e un identificatore univoco.</li>
-        </ul>
-      </li>
-      <li><strong>Dati raccolti automaticamente:</strong>
-        <ul>
-          <li><strong>Account anonimo e ID Utente Unico:</strong> Al primo avvio l'app crea un account anonimo tramite Firebase Authentication, senza nome né email. Il suo identificatore univoco serve ad associare piano e crediti al tuo dispositivo e, se colleghi un account Google o Apple, resta lo stesso.</li>
-          <li><strong>Dati del piano e dei crediti:</strong> Nel nostro database (Cloud Firestore, nell'Unione europea) conserviamo per ogni account: piano (gratuito o Premium), crediti disponibili, data di registrazione e dell'ultima ricarica mensile, scadenza dell'abbonamento e contatori d'uso (giornalieri e al minuto) usati per applicare i limiti del servizio.</li>
-          <li><strong>Verifica dell'app (App Check):</strong> Per impedire l'uso del servizio da parte di app non autentiche, l'app ottiene un'attestazione del dispositivo tramite Google Play Integrity (Android) o Apple App Attest e DeviceCheck (iOS). L'attestazione non contiene dati personali.</li>
-          <li><strong>Configurazione remota:</strong> L'app usa Firebase Remote Config e Firebase Installations per sapere se è disponibile un aggiornamento obbligatorio.</li>
-        </ul>
-      </li>
-    </ul>
+      <p>Utilizzando la nostra applicazione, accetti la raccolta e l'uso delle informazioni in conformità con questa policy.</p>
 
-    <h3>3. Dati che restano sul tuo dispositivo</h3>
-    <ul>
-      <li><strong>Audio e audiolibri:</strong> I file audio che salvi e i tuoi audiolibri restano solo sul tuo telefono e non vengono inviati a noi. Si cancellano eliminandoli dall'app o disinstallandola.</li>
-      <li><strong>Riconoscimento della lingua:</strong> Il riconoscimento automatico della lingua del testo avviene sul telefono, con Google ML Kit: per questa funzione il testo non viene inviato.</li>
-    </ul>
+      <h3>1. Titolare del Trattamento dei Dati</h3>
+      <p>Il titolare del trattamento dei dati personali raccolti tramite questa applicazione è:</p>
+      <p>Kastriot Lleshi<br>
+      <strong>Indirizzo Email di Contatto:</strong> klleshi99@gmail.com</p>
 
-    <h3>4. Finalità del Trattamento dei Dati</h3>
-    <p>Utilizziamo i dati raccolti per le seguenti finalità:</p>
-    <ul>
-      <li><strong>Per fornire e mantenere il nostro servizio:</strong> Convertire il testo in audio e applicare i crediti e i limiti di utilizzo del tuo piano.</li>
-      <li><strong>Per gestire il tuo account:</strong> Creare e gestire il tuo account utente (anonimo o collegato a Google o Apple) e ritrovare piano e crediti su un nuovo dispositivo.</li>
-      <li><strong>Per gestire abbonamenti e pagamenti:</strong> Elaborare i tuoi acquisti per il piano Premium tramite gli store ufficiali. Allo store viene passato un identificativo anonimo del tuo account, per collegare l'abbonamento al tuo piano.</li>
-      <li><strong>Per mostrare pubblicità:</strong> Per gli utenti del piano gratuito, mostriamo annunci pubblicitari per sostenere il servizio.</li>
-      <li><strong>Per proteggere il servizio:</strong> Verificare che le richieste provengano dall'app autentica e prevenire abusi.</li>
-    </ul>
+      <h3>2. Tipi di Dati Raccolti</h3>
+      <p>Per fornire il nostro servizio raccogliamo i seguenti tipi di informazioni.</p>
+      <ul>
+        <li><strong>Dati forniti dall'utente:</strong>
+          <ul>
+            <li><strong>Testo per la sintesi vocale:</strong> Il testo che inserisci, incolli o importi da file (TXT, PDF) e pagine web viene inviato a una funzione sui nostri server Google Cloud nell'Unione europea, che lo trasmette a Google Cloud Text-to-Speech e restituisce l'audio. Il testo non viene conservato né registrato. In caso di errore registriamo solo l'identificativo dell'account, la voce usata e il tipo di errore.</li>
+            <li><strong>Informazioni dell'account (per utenti registrati):</strong> Se colleghi il tuo account con Google o con Apple, riceviamo nome, indirizzo email (oppure l'indirizzo di inoltro fornito da Apple, se scegli di nascondere la tua email) e un identificatore univoco.</li>
+          </ul>
+        </li>
+        <li><strong>Dati raccolti automaticamente:</strong>
+          <ul>
+            <li><strong>Account anonimo e ID Utente Unico:</strong> Al primo avvio l'app crea un account anonimo tramite Firebase Authentication, senza nome né email. Il suo identificatore univoco serve ad associare piano e crediti al tuo dispositivo e, se colleghi un account Google o Apple, resta lo stesso.</li>
+            <li><strong>Dati del piano e dei crediti:</strong> Nel nostro database (Cloud Firestore, nell'Unione europea) conserviamo per ogni account: piano (gratuito o Premium), crediti disponibili, data di registrazione e dell'ultima ricarica mensile, scadenza dell'abbonamento e contatori d'uso (giornalieri e al minuto) usati per applicare i limiti del servizio.</li>
+            <li><strong>Verifica dell'app (App Check):</strong> Per impedire l'uso del servizio da parte di app non autentiche, l'app ottiene un'attestazione del dispositivo tramite Google Play Integrity (Android) o Apple App Attest e DeviceCheck (iOS). L'attestazione non contiene dati personali.</li>
+            <li><strong>Configurazione remota:</strong> L'app usa Firebase Remote Config e Firebase Installations per sapere se è disponibile un aggiornamento obbligatorio.</li>
+          </ul>
+        </li>
+      </ul>
 
-    <h3>5. Servizi di Terze Parti</h3>
-    <p>La nostra app si avvale di servizi forniti da terze parti per funzionare. Ognuno di questi servizi ha la propria informativa sulla privacy.</p>
-    <ul>
-      <li><strong>Google Cloud Text-to-Speech:</strong> Utilizzato per la sintesi vocale. Il testo fornito viene inviato a Google per essere processato.</li>
-      <li><strong>Firebase (di Google):</strong> Firebase Authentication, Cloud Firestore, Cloud Functions, App Check, Remote Config e Installations.</li>
-      <li><strong>Google Play Integrity e Apple App Attest / DeviceCheck:</strong> Per la verifica dell'autenticità dell'app.</li>
-      <li><strong>Google Sign-In e Accedi con Apple:</strong> Se scegli di collegare il tuo account.</li>
-      <li><strong>Google ML Kit:</strong> Per il riconoscimento della lingua, eseguito sul dispositivo.</li>
-      <li><strong>AdMob (di Google):</strong> Per mostrare annunci pubblicitari agli utenti del piano gratuito. Il consenso agli annunci personalizzati è raccolto con il modulo di consenso di Google e si può modificare in qualsiasi momento dall'app, in Informazioni → Preferenze Privacy (Pubblicità).</li>
-      <li><strong>Google Play Billing & Apple In-App Purchases:</strong> Per gestire in modo sicuro gli abbonamenti e i pagamenti. Non abbiamo mai accesso ai dati della tua carta di credito.</li>
-    </ul>
+      <h3>3. Dati che restano sul tuo dispositivo</h3>
+      <ul>
+        <li><strong>Audio e audiolibri:</strong> I file audio che salvi e i tuoi audiolibri restano solo sul tuo telefono e non vengono inviati a noi. Si cancellano eliminandoli dall'app o disinstallandola.</li>
+        <li><strong>Riconoscimento della lingua:</strong> Il riconoscimento automatico della lingua del testo avviene sul telefono, con Google ML Kit: per questa funzione il testo non viene inviato.</li>
+      </ul>
 
-    <h3>6. Conservazione dei Dati</h3>
-    <p>I dati del tuo account (piano, crediti, date e contatori d'uso) sono conservati finché l'account esiste o fino alla tua richiesta di eliminazione. I registri tecnici degli errori sono conservati per un periodo limitato, di norma fino a 30 giorni.</p>
+      <h3>4. Finalità del Trattamento dei Dati</h3>
+      <p>Utilizziamo i dati raccolti per le seguenti finalità:</p>
+      <ul>
+        <li><strong>Per fornire e mantenere il nostro servizio:</strong> Convertire il testo in audio e applicare i crediti e i limiti di utilizzo del tuo piano.</li>
+        <li><strong>Per gestire il tuo account:</strong> Creare e gestire il tuo account utente (anonimo o collegato a Google o Apple) e ritrovare piano e crediti su un nuovo dispositivo.</li>
+        <li><strong>Per gestire abbonamenti e pagamenti:</strong> Elaborare i tuoi acquisti per il piano Premium tramite gli store ufficiali. Allo store viene passato un identificativo anonimo del tuo account, per collegare l'abbonamento al tuo piano.</li>
+        <li><strong>Per mostrare pubblicità:</strong> Per gli utenti del piano gratuito, mostriamo annunci pubblicitari per sostenere il servizio.</li>
+        <li><strong>Per proteggere il servizio:</strong> Verificare che le richieste provengano dall'app autentica e prevenire abusi.</li>
+      </ul>
 
-    <h3>7. Diritti dell'Utente</h3>
-    <p>Hai il diritto di accedere, modificare o cancellare i tuoi dati personali. Per qualsiasi richiesta relativa ai tuoi dati, puoi contattarci all'indirizzo email fornito in questa informativa. Per eliminare il tuo account e i dati associati, segui le istruzioni nella pagina <a href="delete.html">Eliminazione dell'account</a>.</p>
+      <h3>5. Servizi di Terze Parti</h3>
+      <p>La nostra app si avvale di servizi forniti da terze parti per funzionare. Ognuno di questi servizi ha la propria informativa sulla privacy.</p>
+      <ul>
+        <li><strong>Google Cloud Text-to-Speech:</strong> Utilizzato per la sintesi vocale. Il testo fornito viene inviato a Google per essere processato.</li>
+        <li><strong>Firebase (di Google):</strong> Firebase Authentication, Cloud Firestore, Cloud Functions, App Check, Remote Config e Installations.</li>
+        <li><strong>Google Play Integrity e Apple App Attest / DeviceCheck:</strong> Per la verifica dell'autenticità dell'app.</li>
+        <li><strong>Google Sign-In e Accedi con Apple:</strong> Se scegli di collegare il tuo account.</li>
+        <li><strong>Google ML Kit:</strong> Per il riconoscimento della lingua, eseguito sul dispositivo.</li>
+        <li><strong>AdMob (di Google):</strong> Per mostrare annunci pubblicitari agli utenti del piano gratuito. Il consenso agli annunci personalizzati è raccolto con il modulo di consenso di Google e si può modificare in qualsiasi momento dall'app, in Informazioni → Preferenze Privacy (Pubblicità).</li>
+        <li><strong>Google Play Billing & Apple In-App Purchases:</strong> Per gestire in modo sicuro gli abbonamenti e i pagamenti. Non abbiamo mai accesso ai dati della tua carta di credito.</li>
+      </ul>
 
-    <h3>8. Modifiche a questa Informativa sulla Privacy</h3>
-    <p>Potremmo aggiornare la nostra Informativa sulla Privacy di tanto in tanto. Ti informeremo di eventuali modifiche pubblicando la nuova informativa su questa pagina. Si consiglia di consultare periodicamente questa pagina per eventuali cambiamenti.</p>
+      <h3>6. Conservazione dei Dati</h3>
+      <p>I dati del tuo account (piano, crediti, date e contatori d'uso) sono conservati finché l'account esiste o fino alla tua richiesta di eliminazione. I registri tecnici degli errori sono conservati per un periodo limitato, di norma fino a 30 giorni.</p>
+
+      <h3>7. Diritti dell'Utente</h3>
+      <p>Hai il diritto di accedere, modificare o cancellare i tuoi dati personali. Per qualsiasi richiesta relativa ai tuoi dati, puoi contattarci all'indirizzo email fornito in questa informativa. Per eliminare il tuo account e i dati associati, segui le istruzioni nella pagina <a href="delete.html">Eliminazione dell'account</a>.</p>
+
+      <h3>8. Modifiche a questa Informativa sulla Privacy</h3>
+      <p>Potremmo aggiornare la nostra Informativa sulla Privacy di tanto in tanto. Ti informeremo di eventuali modifiche pubblicando la nuova informativa su questa pagina. Si consiglia di consultare periodicamente questa pagina per eventuali cambiamenti.</p>
+    </div>
+  </main>
+
+  <footer>
+    <span>&copy; 2026 Vocalize</span>
+    <nav>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Termini</a>
+      <a href="delete.html">Eliminazione account</a>
+    </nav>
+    <span>Un progetto di <a href="https://klleshi.com/">Kastriot Lleshi</a></span>
+  </footer>
+</div>
 
 </body>
 </html>

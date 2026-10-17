@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Vocalize guides and FAQ: how to listen to text, import PDFs and web pages, save MP3s, create audiobooks, credits, subscription and account.">
+<link rel="canonical" href="https://vocalize.klleshi.com/en/faq.html" />
+<link rel="alternate" hreflang="it" href="https://vocalize.klleshi.com/faq.html" />
+<link rel="alternate" hreflang="en" href="https://vocalize.klleshi.com/en/faq.html" />
+<link rel="alternate" hreflang="x-default" href="https://vocalize.klleshi.com/faq.html" />
+<title>Guides and FAQ | Vocalize</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg: #10203A;
+    --panel: #16294A;
+    --panel-line: #2C4468;
+    --ink: #F1EEE4;
+    --ink-dim: #C7D0DE;
+    --line: #5D7FA3;
+    --accent: #E2622C;
+    --accent-dim: #B84E23;
+    --good: #4E9B6E;
+    --frame-margin: clamp(14px, 3vw, 34px);
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *{ animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  }
+
+  body{
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3{
+    font-family: "Big Shoulders Display", "IBM Plex Sans", sans-serif;
+    font-weight: 700;
+    line-height: 1.05;
+    margin: 0;
+  }
+
+  a{ color: inherit; }
+  .mono{ font-family: "IBM Plex Mono", monospace; letter-spacing: 0.01em; }
+
+  /* ---------- drafting-sheet frame ---------- */
+
+  .sheet{
+    position: relative;
+    margin: var(--frame-margin);
+    border: 1px solid var(--line);
+  }
+
+  .tick{ position: absolute; width: 16px; height: 16px; pointer-events: none; }
+  .tick::before, .tick::after{ content: ""; position: absolute; background: var(--line); }
+  .tick::before{ width: 100%; height: 1px; top: 50%; left: 0; }
+  .tick::after{ width: 1px; height: 100%; left: 50%; top: 0; }
+  .tick.tl{ top: -8px; left: -8px; }
+  .tick.tr{ top: -8px; right: -8px; }
+  .tick.bl{ bottom: -8px; left: -8px; }
+  .tick.br{ bottom: -8px; right: -8px; }
+
+  /* ---------- top bar ---------- */
+
+  .topbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px clamp(20px, 4vw, 48px);
+    border-bottom: 1px solid var(--panel-line);
+  }
+  .wordmark{
+    font-family: "Big Shoulders Display", sans-serif;
+    font-weight: 700;
+    font-size: 21px;
+    text-decoration: none;
+  }
+  .topnav{ display: flex; align-items: center; gap: clamp(14px, 3vw, 30px); }
+  .topnav a{
+    font-size: 14px;
+    text-decoration: none;
+    color: var(--ink-dim);
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+    transition: color .15s ease, border-color .15s ease;
+  }
+  .topnav a:hover, .topnav a:focus-visible{ color: var(--ink); border-color: var(--accent); }
+  .topnav a.lang{
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12.5px;
+    border: 1px solid var(--panel-line);
+    padding: 3px 8px;
+  }
+  .topnav a.lang:hover, .topnav a.lang:focus-visible{ border-color: var(--accent); }
+
+  /* ---------- hero ---------- */
+
+  .hero{
+    padding: clamp(40px, 7vw, 84px) clamp(20px, 4vw, 48px) clamp(24px, 5vw, 48px);
+    border-bottom: 1px solid var(--panel-line);
+  }
+  .hero-tag{ font-size: 13px; color: var(--line); margin-bottom: 16px; }
+  .hero h1{
+    font-size: clamp(2.1rem, 4.6vw, 3.4rem);
+    max-width: 20ch;
+  }
+  .hero-sub{
+    margin-top: 20px;
+    max-width: 58ch;
+    color: var(--ink-dim);
+    font-size: 17px;
+  }
+
+  .value-list{
+    list-style: none;
+    padding: 0;
+    margin: 30px 0 36px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px 24px;
+    max-width: 900px;
+  }
+  .value-list li{
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 14.5px;
+    color: var(--ink-dim);
+  }
+  .value-list li::before{
+    content: "";
+    width: 6px;
+    height: 6px;
+    margin-top: 7px;
+    background: var(--accent);
+    flex: none;
+  }
+  .value-list strong{ color: var(--ink); display: block; font-weight: 600; }
+
+  .cta-group{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .btn{
+    display: inline-block;
+    font-size: 14px;
+    padding: 13px 22px;
+    border: 1px solid var(--line);
+    text-decoration: none;
+    color: var(--ink);
+    background: transparent;
+    transition: border-color .15s ease, color .15s ease, background .15s ease;
+  }
+  .btn:hover, .btn:focus-visible{ border-color: var(--accent); color: var(--accent); }
+  .btn-primary{
+    border-color: var(--accent);
+    background: var(--accent);
+    color: var(--bg);
+    font-weight: 600;
+  }
+  .btn-primary:hover, .btn-primary:focus-visible{
+    background: var(--accent-dim);
+    border-color: var(--accent-dim);
+    color: var(--bg);
+  }
+  .btn small{ display: block; font-weight: 400; font-size: 11.5px; opacity: .8; margin-top: 2px; }
+
+  /* ---------- screenshots ---------- */
+
+  .shots-wrap{
+    padding: 0 clamp(20px, 4vw, 48px) clamp(48px, 8vw, 84px);
+    border-bottom: 1px solid var(--panel-line);
+  }
+  .shots{
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 260px));
+    justify-content: center;
+    gap: clamp(18px, 3vw, 36px);
+  }
+  .shot figure{ margin: 0; }
+  .shot-frame{
+    position: relative;
+    border: 1px solid var(--line);
+    padding: 8px;
+    background: #0C1930;
+  }
+  .shot-frame .tick{ width: 12px; height: 12px; }
+  .shot-frame .tick::before, .shot-frame .tick::after{ background: var(--accent); }
+  .shot-frame .tick.tl{ top: -6px; left: -6px; }
+  .shot-frame .tick.tr{ top: -6px; right: -6px; }
+  .shot-frame .tick.bl{ bottom: -6px; left: -6px; }
+  .shot-frame .tick.br{ bottom: -6px; right: -6px; }
+  .shot-screen{
+    position: relative;
+    aspect-ratio: 9 / 20;
+    overflow: hidden;
+    background: #0F1F3A;
+  }
+  .shot-screen img{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .video{ max-width: 326px; margin: clamp(36px, 6vw, 60px) auto 0; }
+  .video video{ display: block; width: 100%; height: auto; background: #0C1930; }
+  .video figcaption{ margin-top: 12px; text-align: center; font-size: 12px; color: var(--line); }
+  .shot figcaption{
+    margin-top: 12px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--line);
+  }
+
+  /* ---------- section shell ---------- */
+
+  section{ padding: clamp(40px, 7vw, 80px) clamp(20px, 4vw, 48px); border-bottom: 1px solid var(--panel-line); }
+  section:last-of-type{ border-bottom: none; }
+
+  .section-head{
+    margin-bottom: clamp(28px, 5vw, 44px);
+    border-bottom: 1px solid var(--panel-line);
+    padding-bottom: 18px;
+  }
+  .section-head h2{ font-size: clamp(1.6rem, 3vw, 2.2rem); }
+  .section-head p{ color: var(--ink-dim); margin-top: 10px; max-width: 60ch; font-size: 15px; }
+
+  /* ---------- features ---------- */
+
+  .features{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .feature{
+    border: 1px solid var(--panel-line);
+    background: var(--panel);
+    padding: 20px 20px 22px;
+  }
+  .feature-index{ font-size: 12px; color: var(--accent); }
+  .feature h3{ font-size: 1.25rem; margin-top: 10px; }
+  .feature p{ margin: 10px 0 0; font-size: 14px; color: var(--ink-dim); }
+
+  /* ---------- pricing spec sheet ---------- */
+
+  .pricing{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .plan{
+    border: 1px solid var(--panel-line);
+    background: var(--panel);
+  }
+  .plan-head{
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--panel-line);
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .plan-head h3{ font-size: 1.4rem; }
+  .plan.premium .plan-head{ border-bottom-color: var(--accent-dim); }
+  .plan-price{ font-size: 1.1rem; font-weight: 600; }
+  .plan.premium .plan-price{ color: var(--accent); text-align: right; }
+  .plan-price small{ display: block; font-size: 12.5px; font-weight: 400; color: var(--ink-dim); margin-top: 2px; }
+  .plan dl{
+    padding: 18px 24px 22px;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px 14px;
+    font-size: 14px;
+  }
+  .plan dt{ color: var(--ink-dim); }
+  .plan dd{ margin: 0; text-align: right; font-weight: 500; }
+  .plan dd.yes{ color: var(--good); }
+  .plan dd.no{ color: var(--line); }
+  .plan-note{ padding: 0 24px 22px; margin: 0; font-size: 13px; color: var(--line); }
+  .pricing-note{ margin-top: 18px; font-size: 13.5px; color: var(--ink-dim); max-width: 72ch; }
+
+  /* ---------- changelog ---------- */
+
+  .release{ border: 1px solid var(--panel-line); background: var(--panel); }
+  .release-head{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px 16px;
+    padding: 16px 22px;
+    border-bottom: 1px solid var(--panel-line);
+  }
+  .release-head h3{ font-size: 1.2rem; }
+  .release-status{ font-size: 12px; color: var(--accent); }
+  .release-body{ padding: 4px 22px 24px; }
+  .release-group h4{
+    font-family: "IBM Plex Sans", sans-serif;
+    font-weight: 600;
+    font-size: 13.5px;
+    color: var(--ink);
+    margin: 18px 0 10px;
+  }
+  .changelog-list{ list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+  .changelog-list li{
+    font-size: 14px;
+    color: var(--ink-dim);
+    padding-left: 16px;
+    position: relative;
+  }
+  .changelog-list li::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 6px;
+    height: 6px;
+    background: var(--line);
+  }
+  .changelog-list strong{ color: var(--ink); font-weight: 600; }
+
+  /* ---------- FAQ ---------- */
+
+  .faq{ display: flex; flex-direction: column; gap: 10px; }
+  .faq details{ border: 1px solid var(--panel-line); background: var(--panel); }
+  .faq summary{
+    cursor: pointer;
+    list-style: none;
+    padding: 16px 22px;
+    font-weight: 600;
+    font-size: 15px;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .faq summary::-webkit-details-marker{ display: none; }
+  .faq summary::after{ content: "+"; font-family: "IBM Plex Mono", monospace; color: var(--accent); }
+  .faq details[open] summary::after{ content: "−"; }
+  .faq details[open] summary{ border-bottom: 1px solid var(--panel-line); }
+  .faq .answer{ padding: 14px 22px 18px; font-size: 14.5px; color: var(--ink-dim); }
+  .faq .answer p{ margin: 0 0 10px; max-width: 72ch; }
+  .faq .answer p:last-child{ margin-bottom: 0; }
+  .faq .answer a{ color: var(--accent); text-underline-offset: 3px; }
+  .faq-more{ margin-top: 24px; }
+
+  /* ---------- support / title block ---------- */
+
+  .titleblock{
+    padding: clamp(30px, 6vw, 50px) clamp(20px, 4vw, 48px) clamp(40px, 6vw, 56px);
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 30px;
+    border-bottom: 1px solid var(--panel-line);
+  }
+  .titleblock h2{ font-size: clamp(1.5rem, 3vw, 2rem); }
+  .titleblock p{ color: var(--ink-dim); max-width: 46ch; margin-top: 14px; }
+  .support-email{
+    display: inline-block;
+    margin-top: 16px;
+    font-size: 15px;
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .tb-meta{
+    border-left: 1px solid var(--panel-line);
+    padding-left: 28px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 8px 18px;
+    align-self: start;
+    font-size: 13.5px;
+    margin: 0;
+  }
+  .tb-meta dt{ color: var(--line); }
+  .tb-meta dd{ margin: 0; }
+  .tb-meta a{ text-decoration: underline; text-decoration-color: var(--panel-line); text-underline-offset: 3px; }
+  .tb-meta a:hover, .tb-meta a:focus-visible{ text-decoration-color: var(--accent); color: var(--accent); }
+
+  footer{
+    padding: 22px clamp(20px, 4vw, 48px);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--line);
+  }
+  footer nav{ display: flex; flex-wrap: wrap; gap: 8px 18px; }
+  footer a{ text-decoration: underline; text-decoration-color: var(--panel-line); text-underline-offset: 3px; }
+  footer a:hover, footer a:focus-visible{ text-decoration-color: var(--accent); color: var(--accent); }
+
+  :focus-visible{ outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* ---------- responsive ---------- */
+
+  @media (max-width: 960px){
+    .features{ grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 760px){
+    .value-list{ grid-template-columns: 1fr 1fr; }
+    .pricing{ grid-template-columns: 1fr; }
+    .titleblock{ grid-template-columns: 1fr; }
+    .tb-meta{ border-left: none; padding-left: 0; border-top: 1px solid var(--panel-line); padding-top: 20px; }
+    .shots{ grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  }
+  @media (max-width: 560px){
+    .topnav a:not(.lang){ display: none; }
+    .value-list{ grid-template-columns: 1fr; }
+    .features{ grid-template-columns: 1fr; }
+    .shots{ grid-template-columns: minmax(0, 240px); }
+  }
+
+  .back-link{ display: inline-block; margin-bottom: 18px; font-size: 14px; color: var(--accent); text-decoration: none; }
+  .back-link:hover, .back-link:focus-visible{ text-decoration: underline; text-underline-offset: 3px; }
+  .group-title{ font-family: "IBM Plex Mono", monospace; font-size: 13px; color: var(--line); margin: 0 0 14px; }
+  .faq + .group-title{ margin-top: 40px; }
+  .faq .answer ol{ margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; }
+  .faq .answer ol + p{ margin-top: 12px; }
+  .cta-end{ text-align: left; }
+  .cta-end p{ color: var(--ink-dim); margin: 10px 0 22px; max-width: 60ch; }
+</style>
+</head>
+<body>
+
+<div class="sheet">
+  <span class="tick tl"></span><span class="tick tr"></span>
+  <span class="tick bl"></span><span class="tick br"></span>
+
+  <header class="topbar">
+    <a class="wordmark" href="./">Vocalize</a>
+    <nav class="topnav" aria-label="Navigation">
+      <a href="#guide">Guides</a>
+      <a href="#faq">FAQ</a>
+      <a href="./#support">Support</a>
+      <a class="lang" href="../faq.html" hreflang="it" lang="it">IT</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="top">
+    <a class="back-link" href="./">← Back to home</a>
+    <p class="hero-tag mono">Guides and frequently asked questions</p>
+    <h1>How to use Vocalize.</h1>
+    <p class="hero-sub">Step-by-step guides for the main features and answers to the most common questions about credits, subscription and account.</p>
+  </section>
+
+  <section id="guide">
+    <div class="section-head">
+      <h2>Guides</h2>
+      <p>All features start from the Home screen, below the text box.</p>
+    </div>
+    <div class="faq">
+      <details>
+        <summary>Listen to a text</summary>
+        <div class="answer">
+          <ol><li>In the <strong>Home</strong> tab, type or paste the text in the box.</li><li>Choose <strong>Language</strong> and <strong>Voice</strong>. If you don't, Vocalize detects the language of the text and sets it for you.</li><li>Tap <strong>Play</strong>. <strong>Stop</strong> ends the reading.</li></ol><p>Long texts are read in blocks: listening starts right away while the rest is prepared.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Import a PDF or TXT file</summary>
+        <div class="answer">
+          <ol><li>Tap <strong>File</strong> below the text box.</li><li>Pick a PDF or TXT file from your phone.</li><li>The text appears in the box: tap <strong>Play</strong>.</li></ol><p><strong>Clear</strong> empties the box.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Import a web page</summary>
+        <div class="answer">
+          <ol><li>Tap <strong>Web</strong> below the text box.</li><li>Paste the page link (it must start with https://).</li><li>Vocalize extracts the article text and puts it in the box.</li></ol>
+        </div>
+      </details>
+      <details>
+        <summary>Adjust speed, pitch and volume</summary>
+        <div class="answer">
+          <p>Tap <strong>Speed</strong>, <strong>Pitch</strong> or <strong>Volume</strong> below the text box and move the slider. <strong>Default</strong> restores the initial values.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Save the audio as MP3 and share it</summary>
+        <div class="answer">
+          <ol><li>After the reading, tap <strong>Save</strong> and name the file.</li><li>You'll find it in the <strong>Saved File</strong> tab, where you can play it again, rename it, export it or share it with other apps.</li></ol>
+        </div>
+      </details>
+      <details>
+        <summary>Create an audiobook with chapters</summary>
+        <div class="answer">
+          <ol><li>Save as MP3 the texts you want to use as chapters.</li><li>Open the <strong>Audiobook</strong> tab and tap <strong>+</strong>.</li><li>Enter the title, pick a cover if you like and add chapters from your saved files.</li><li>Save: the audiobook resumes where you left off.</li></ol><p>The free plan lets you create one audiobook; Premium has no limit.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Use the sleep timer</summary>
+        <div class="answer">
+          <p>During playback, open the player by tapping the bar at the bottom, then tap <strong>Timer</strong> and choose when to stop the audio.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="section-head">
+      <h2>Frequently asked questions</h2>
+    </div>
+    <p class="group-title">Credits and Premium</p>
+    <div class="faq">
+      <details>
+        <summary>How do credits work?</summary>
+        <div class="answer">
+          <p>Each reading uses credits based on the characters in the text and the type of voice. Your balance is in the <strong>Premium</strong> tab.</p><p>Every month, on the day you started using the app, your balance goes back to your plan's maximum: 200,000 credits on the free plan, 800,000 with Premium. Unused credits don't roll over. There is also a daily limit to keep usage fair.</p>
+        </div>
+      </details>
+      <details>
+        <summary>How many credits do the different voices use?</summary>
+        <div class="answer">
+          <p><strong>Standard</strong> and <strong>WaveNet</strong> voices use 1 credit per character, <strong>Neural2</strong> voices 4 credits and <strong>Studio</strong> voices (Chirp HD) 8 credits. On the free plan, Neural2 and Studio voices use a separate allowance of 25,000 trial credits.</p>
+        </div>
+      </details>
+      <details>
+        <summary>How much does Premium cost?</summary>
+        <div class="answer">
+          <p><strong>€4.99 per month</strong> or <strong>€49.99 per year</strong> (prices for Italy, VAT included; in other countries the store shows the price in your local currency). Premium includes 800,000 credits per month, all voices, unlimited audiobooks and no ads.</p>
+        </div>
+      </details>
+      <details>
+        <summary>How do I cancel my subscription?</summary>
+        <div class="answer">
+          <p>Subscriptions are managed by the stores. On Android: Google Play → profile → Payments &amp; subscriptions → Subscriptions. On iPhone: Settings → your name → Subscriptions. Premium stays active until the end of the period you already paid for.</p>
+        </div>
+      </details>
+      <details>
+        <summary>How do I restore my subscription on a new phone?</summary>
+        <div class="answer">
+          <p>Install Vocalize, sign in with the same Google or Apple account you used for the subscription (<strong>Premium</strong> tab → <strong>Save your credits</strong>) and tap <strong>Restore Purchases</strong>.</p>
+        </div>
+      </details>
+    </div>
+    <p class="group-title">Account and data</p>
+    <div class="faq">
+      <details>
+        <summary>Do I need an account?</summary>
+        <div class="answer">
+          <p>No. On first launch Vocalize creates an anonymous account and you can use the app right away. If you link a Google or Apple account (<strong>Premium</strong> tab → <strong>Save your credits</strong>), you keep your plan and credits when you change phone.</p>
+        </div>
+      </details>
+      <details>
+        <summary>The Premium page shows "Connection error"</summary>
+        <div class="answer">
+          <p>The app can't reach the service. Check your internet connection and tap <strong>Retry</strong>: as soon as you're back online, your balance appears by itself.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Is the text I read stored?</summary>
+        <div class="answer">
+          <p>No. The text is sent to the speech service only to create the audio and is not stored. Saved audio files and audiobooks stay only on your phone. Details in the <a href="privacy.html">privacy policy</a>.</p>
+        </div>
+      </details>
+      <details>
+        <summary>How do I delete my account and data?</summary>
+        <div class="answer">
+          <p>Write to <a href="mailto:klleshi99@gmail.com?subject=Vocalize%20Account%20Deletion%20Request">klleshi99@gmail.com</a> from the address linked to your account, or tell us how you sign in to the app. Your account and data are deleted within 30 days: details are on the <a href="delete.html">account deletion</a> page. Saved audio files are removed by uninstalling the app.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section class="cta-end">
+    <h2>Ready to listen to your texts?</h2>
+    <p>Vocalize is free, with 200,000 credits per month. Premium unlocks every voice and removes ads.</p>
+    <div class="cta-group">
+      <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=io.github.klleshi.vocalize">Get it on Google Play<small>Android</small></a>
+      <a class="btn" href="https://apps.apple.com/app/id6757393059">Download on the App Store<small>iPhone and iPad</small></a>
+    </div>
+  </section>
+
+  <section class="titleblock" id="supporto">
+    <div>
+      <h2>Didn't find the answer?</h2>
+      <p>Write to me directly: I personally answer every message.</p>
+      <a class="support-email mono" href="mailto:klleshi99@gmail.com">klleshi99@gmail.com</a>
+    </div>
+    <dl class="tb-meta">
+      <dt>Privacy</dt>
+      <dd><a href="privacy.html">Privacy policy</a></dd>
+      <dt>Terms</dt>
+      <dd><a href="terms.html">Terms of service</a></dd>
+      <dt>Account</dt>
+      <dd><a href="delete.html">Account deletion</a></dd>
+    </dl>
+  </section>
+
+  <footer>
+    <span>&copy; 2026 Vocalize</span>
+    <nav aria-label="Documents">
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="delete.html">Account deletion</a>
+    </nav>
+    <span>A project by <a href="https://klleshi.com/">Kastriot Lleshi</a></span>
+  </footer>
+</div>
+
+</body>
+</html>

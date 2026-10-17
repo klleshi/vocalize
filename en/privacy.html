@@ -13,7 +13,7 @@
 
     <h1>Privacy Policy for Vocalize</h1>
 
-    <p><strong>Last updated:</strong> 20/09/2025</p>
+    <p><strong>Last updated:</strong> 17/10/2026</p>
 
     <p>Thank you for choosing to use Vocalize, our App. Your privacy is very important to us. This privacy policy explains what data we collect, how we use it, and what your rights are in relation to it.</p>
 
@@ -25,48 +25,60 @@
     <strong>Contact Email:</strong> klleshi99@gmail.com</p>
 
     <h3>2. Types of Data Collected</h3>
-    <p>To provide and improve our service, we collect different types of information.</p>
+    <p>To provide our service, we collect the following types of information.</p>
     <ul>
       <li><strong>Data Provided by You:</strong>
         <ul>
-          <li><strong>Text for speech synthesis:</strong> The text you enter, paste, or import from files (PDF) and web pages is sent to our service providers for conversion into audio. We do not store this text after the synthesis.</li>
-          <li><strong>Account information (for registered users):</strong> If you choose to link your account, we collect basic information from your Google profile, such as your name, email address, and a unique identifier.</li>
+          <li><strong>Text for speech synthesis:</strong> The text you enter, paste, or import from files (TXT, PDF) and web pages is sent to a function on our Google Cloud servers in the European Union, which passes it to Google Cloud Text-to-Speech and returns the audio. The text is neither stored nor logged. If an error occurs, we only log the account identifier, the voice used and the type of error.</li>
+          <li><strong>Account information (for registered users):</strong> If you link your account with Google or Apple, we receive your name, email address (or the relay address provided by Apple, if you choose to hide your email) and a unique identifier.</li>
         </ul>
       </li>
       <li><strong>Data Collected Automatically:</strong>
         <ul>
-          <li><strong>Usage Data (Analytics):</strong> We collect anonymous information about how you interact with the app, such as the features you use and crashes, in order to improve the service via Google Analytics for Firebase.</li>
-          <li><strong>Unique User ID:</strong> The app assigns a unique identifier (anonymous or linked to your account) to manage your plan, credits, and features.</li>
+          <li><strong>Anonymous account and Unique User ID:</strong> On first launch the app creates an anonymous account through Firebase Authentication, with no name or email. Its unique identifier links your plan and credits to your device and stays the same if you link a Google or Apple account.</li>
+          <li><strong>Plan and credit data:</strong> In our database (Cloud Firestore, in the European Union) we store for each account: plan (free or Premium), available credits, registration date and date of the last monthly top-up, subscription expiry and usage counters (daily and per minute) used to enforce the service limits.</li>
+          <li><strong>App verification (App Check):</strong> To prevent the service from being used by non-genuine apps, the app obtains a device attestation through Google Play Integrity (Android) or Apple App Attest and DeviceCheck (iOS). The attestation contains no personal data.</li>
+          <li><strong>Remote configuration:</strong> The app uses Firebase Remote Config and Firebase Installations to know whether a mandatory update is available.</li>
         </ul>
       </li>
     </ul>
 
-    <h3>3. Purpose of Data Processing</h3>
-    <p>We use the collected data for the following purposes:</p>
+    <h3>3. Data That Stays on Your Device</h3>
     <ul>
-      <li><strong>To provide and maintain our service:</strong> To convert text to audio, save your files and audiobook projects.</li>
-      <li><strong>To manage your account:</strong> To create and manage your user account (anonymous or registered) and sync your data.</li>
-      <li><strong>To manage subscriptions and payments:</strong> To process your purchases for the Premium plan and free trials through the official stores.</li>
-      <li><strong>To display advertising:</strong> For users of the free plan, we display ads to support the service.</li>
-      <li><strong>To improve the application:</strong> We analyze usage data to understand which features are most used and to fix any issues.</li>
+      <li><strong>Audio and audiobooks:</strong> The audio files you save and your audiobooks stay only on your phone and are never sent to us. They are removed when you delete them in the app or uninstall it.</li>
+      <li><strong>Language detection:</strong> Automatic detection of the text's language runs on your phone with Google ML Kit: the text is not sent anywhere for this feature.</li>
     </ul>
 
-    <h3>4. Third-Party Services</h3>
+    <h3>4. Purpose of Data Processing</h3>
+    <p>We use the collected data for the following purposes:</p>
+    <ul>
+      <li><strong>To provide and maintain our service:</strong> To convert text to audio and to apply the credits and usage limits of your plan.</li>
+      <li><strong>To manage your account:</strong> To create and manage your user account (anonymous or linked to Google or Apple) and to restore your plan and credits on a new device.</li>
+      <li><strong>To manage subscriptions and payments:</strong> To process your purchases for the Premium plan through the official stores. An anonymous identifier of your account is passed to the store to link the subscription to your plan.</li>
+      <li><strong>To display advertising:</strong> For users of the free plan, we display ads to support the service.</li>
+      <li><strong>To protect the service:</strong> To verify that requests come from the genuine app and to prevent abuse.</li>
+    </ul>
+
+    <h3>5. Third-Party Services</h3>
     <p>Our app uses services provided by third parties to function. Each of these services has its own privacy policy.</p>
     <ul>
       <li><strong>Google Cloud Text-to-Speech:</strong> Used for speech synthesis. The text you provide is sent to Google to be processed.</li>
-      <li><strong>Firebase (by Google):</strong> Firebase Authentication, Cloud Firestore, Google Analytics for Firebase.</li>
-      <li><strong>AdMob (by Google):</strong> To display ads to free plan users.</li>
+      <li><strong>Firebase (by Google):</strong> Firebase Authentication, Cloud Firestore, Cloud Functions, App Check, Remote Config and Installations.</li>
+      <li><strong>Google Play Integrity and Apple App Attest / DeviceCheck:</strong> To verify that the app is genuine.</li>
+      <li><strong>Google Sign-In and Sign in with Apple:</strong> If you choose to link your account.</li>
+      <li><strong>Google ML Kit:</strong> For language detection, performed on the device.</li>
+      <li><strong>AdMob (by Google):</strong> To display ads to free plan users. Consent to personalised ads is collected through Google's consent form and can be changed at any time in the app, under Information → Privacy Preferences (Advertising).</li>
       <li><strong>Google Play Billing & Apple In-App Purchases:</strong> To securely manage subscriptions and payments. We never have access to your credit card data.</li>
     </ul>
 
-    <h3>5. User Rights</h3>
-    <p>You have the right to access, modify, or delete your personal data. For any request regarding your data, you can contact us at the email address provided in this policy.</p>
+    <h3>6. Data Retention</h3>
+    <p>Your account data (plan, credits, dates and usage counters) is kept for as long as the account exists or until you ask for it to be deleted. Technical error logs are kept for a limited period, normally up to 30 days.</p>
 
-    <h3>6. Changes to This Privacy Policy</h3>
+    <h3>7. User Rights</h3>
+    <p>You have the right to access, modify, or delete your personal data. For any request regarding your data, you can contact us at the email address provided in this policy. To delete your account and the associated data, follow the instructions on the <a href="delete.html">account deletion</a> page.</p>
+
+    <h3>8. Changes to This Privacy Policy</h3>
     <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page. You are advised to review this page periodically for any changes.</p>
 
 </body>
 </html>
-
-

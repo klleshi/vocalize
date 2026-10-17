@@ -13,7 +13,7 @@
 
     <h1>Informativa sulla Privacy di Vocalize</h1>
 
-    <p><strong>Ultimo aggiornamento:</strong> 20/09/2025</p>
+    <p><strong>Ultimo aggiornamento:</strong> 17/10/2026</p>
 
     <p>Grazie per aver scelto di utilizzare Vocalize, la nostra App. La tua privacy è molto importante per noi. Questa informativa sulla privacy spiega quali dati raccogliamo, come li usiamo e quali sono i tuoi diritti in relazione ad essi.</p>
 
@@ -25,48 +25,60 @@
     <strong>Indirizzo Email di Contatto:</strong> klleshi99@gmail.com</p>
 
     <h3>2. Tipi di Dati Raccolti</h3>
-    <p>Per fornire e migliorare il nostro servizio, raccogliamo diversi tipi di informazioni.</p>
+    <p>Per fornire il nostro servizio raccogliamo i seguenti tipi di informazioni.</p>
     <ul>
       <li><strong>Dati forniti dall'utente:</strong>
         <ul>
-          <li><strong>Testo per la sintesi vocale:</strong> Il testo che inserisci, incolli o importi da file (PDF) e pagine web viene inviato ai nostri fornitori di servizi per la conversione in audio. Non conserviamo questo testo dopo la sintesi.</li>
-          <li><strong>Informazioni dell'account (per utenti registrati):</strong> Se scegli di collegare il tuo account, raccogliamo le informazioni di base del tuo profilo Google, come nome, indirizzo email e un identificatore univoco.</li>
+          <li><strong>Testo per la sintesi vocale:</strong> Il testo che inserisci, incolli o importi da file (TXT, PDF) e pagine web viene inviato a una funzione sui nostri server Google Cloud nell'Unione europea, che lo trasmette a Google Cloud Text-to-Speech e restituisce l'audio. Il testo non viene conservato né registrato. In caso di errore registriamo solo l'identificativo dell'account, la voce usata e il tipo di errore.</li>
+          <li><strong>Informazioni dell'account (per utenti registrati):</strong> Se colleghi il tuo account con Google o con Apple, riceviamo nome, indirizzo email (oppure l'indirizzo di inoltro fornito da Apple, se scegli di nascondere la tua email) e un identificatore univoco.</li>
         </ul>
       </li>
       <li><strong>Dati raccolti automaticamente:</strong>
         <ul>
-          <li><strong>Dati di Utilizzo (Analytics):</strong> Raccogliamo informazioni anonime su come interagisci con l'app (funzionalità utilizzate, crash, ecc.) al fine di migliorare il servizio, tramite Google Analytics for Firebase.</li>
-          <li><strong>ID Utente Unico:</strong> L'app assegna un identificatore univoco (anonimo o collegato al tuo account) per gestire il tuo piano, i crediti e le funzionalità.</li>
+          <li><strong>Account anonimo e ID Utente Unico:</strong> Al primo avvio l'app crea un account anonimo tramite Firebase Authentication, senza nome né email. Il suo identificatore univoco serve ad associare piano e crediti al tuo dispositivo e, se colleghi un account Google o Apple, resta lo stesso.</li>
+          <li><strong>Dati del piano e dei crediti:</strong> Nel nostro database (Cloud Firestore, nell'Unione europea) conserviamo per ogni account: piano (gratuito o Premium), crediti disponibili, data di registrazione e dell'ultima ricarica mensile, scadenza dell'abbonamento e contatori d'uso (giornalieri e al minuto) usati per applicare i limiti del servizio.</li>
+          <li><strong>Verifica dell'app (App Check):</strong> Per impedire l'uso del servizio da parte di app non autentiche, l'app ottiene un'attestazione del dispositivo tramite Google Play Integrity (Android) o Apple App Attest e DeviceCheck (iOS). L'attestazione non contiene dati personali.</li>
+          <li><strong>Configurazione remota:</strong> L'app usa Firebase Remote Config e Firebase Installations per sapere se è disponibile un aggiornamento obbligatorio.</li>
         </ul>
       </li>
     </ul>
 
-    <h3>3. Finalità del Trattamento dei Dati</h3>
-    <p>Utilizziamo i dati raccolti per le seguenti finalità:</p>
+    <h3>3. Dati che restano sul tuo dispositivo</h3>
     <ul>
-      <li><strong>Per fornire e mantenere il nostro servizio:</strong> Convertire il testo in audio, salvare i tuoi file e progetti di audiolibri.</li>
-      <li><strong>Per gestire il tuo account:</strong> Creare e gestire il tuo account utente (anonimo o registrato) e sincronizzare i tuoi dati.</li>
-      <li><strong>Per gestire abbonamenti e pagamenti:</strong> Elaborare i tuoi acquisti per il piano Premium e le prove gratuite tramite gli store ufficiali.</li>
-      <li><strong>Per mostrare pubblicità:</strong> Per gli utenti del piano gratuito, mostriamo annunci pubblicitari per sostenere il servizio.</li>
-      <li><strong>Per migliorare l'applicazione:</strong> Analizziamo i dati di utilizzo per capire quali funzionalità sono più usate e per correggere eventuali problemi.</li>
+      <li><strong>Audio e audiolibri:</strong> I file audio che salvi e i tuoi audiolibri restano solo sul tuo telefono e non vengono inviati a noi. Si cancellano eliminandoli dall'app o disinstallandola.</li>
+      <li><strong>Riconoscimento della lingua:</strong> Il riconoscimento automatico della lingua del testo avviene sul telefono, con Google ML Kit: per questa funzione il testo non viene inviato.</li>
     </ul>
 
-    <h3>4. Servizi di Terze Parti</h3>
+    <h3>4. Finalità del Trattamento dei Dati</h3>
+    <p>Utilizziamo i dati raccolti per le seguenti finalità:</p>
+    <ul>
+      <li><strong>Per fornire e mantenere il nostro servizio:</strong> Convertire il testo in audio e applicare i crediti e i limiti di utilizzo del tuo piano.</li>
+      <li><strong>Per gestire il tuo account:</strong> Creare e gestire il tuo account utente (anonimo o collegato a Google o Apple) e ritrovare piano e crediti su un nuovo dispositivo.</li>
+      <li><strong>Per gestire abbonamenti e pagamenti:</strong> Elaborare i tuoi acquisti per il piano Premium tramite gli store ufficiali. Allo store viene passato un identificativo anonimo del tuo account, per collegare l'abbonamento al tuo piano.</li>
+      <li><strong>Per mostrare pubblicità:</strong> Per gli utenti del piano gratuito, mostriamo annunci pubblicitari per sostenere il servizio.</li>
+      <li><strong>Per proteggere il servizio:</strong> Verificare che le richieste provengano dall'app autentica e prevenire abusi.</li>
+    </ul>
+
+    <h3>5. Servizi di Terze Parti</h3>
     <p>La nostra app si avvale di servizi forniti da terze parti per funzionare. Ognuno di questi servizi ha la propria informativa sulla privacy.</p>
     <ul>
       <li><strong>Google Cloud Text-to-Speech:</strong> Utilizzato per la sintesi vocale. Il testo fornito viene inviato a Google per essere processato.</li>
-      <li><strong>Firebase (di Google):</strong> Firebase Authentication, Cloud Firestore, Google Analytics for Firebase.</li>
-      <li><strong>AdMob (di Google):</strong> Per mostrare annunci pubblicitari agli utenti del piano gratuito.</li>
+      <li><strong>Firebase (di Google):</strong> Firebase Authentication, Cloud Firestore, Cloud Functions, App Check, Remote Config e Installations.</li>
+      <li><strong>Google Play Integrity e Apple App Attest / DeviceCheck:</strong> Per la verifica dell'autenticità dell'app.</li>
+      <li><strong>Google Sign-In e Accedi con Apple:</strong> Se scegli di collegare il tuo account.</li>
+      <li><strong>Google ML Kit:</strong> Per il riconoscimento della lingua, eseguito sul dispositivo.</li>
+      <li><strong>AdMob (di Google):</strong> Per mostrare annunci pubblicitari agli utenti del piano gratuito. Il consenso agli annunci personalizzati è raccolto con il modulo di consenso di Google e si può modificare in qualsiasi momento dall'app, in Informazioni → Preferenze Privacy (Pubblicità).</li>
       <li><strong>Google Play Billing & Apple In-App Purchases:</strong> Per gestire in modo sicuro gli abbonamenti e i pagamenti. Non abbiamo mai accesso ai dati della tua carta di credito.</li>
     </ul>
 
-    <h3>5. Diritti dell'Utente</h3>
-    <p>Hai il diritto di accedere, modificare o cancellare i tuoi dati personali. Per qualsiasi richiesta relativa ai tuoi dati, puoi contattarci all'indirizzo email fornito in questa informativa.</p>
+    <h3>6. Conservazione dei Dati</h3>
+    <p>I dati del tuo account (piano, crediti, date e contatori d'uso) sono conservati finché l'account esiste o fino alla tua richiesta di eliminazione. I registri tecnici degli errori sono conservati per un periodo limitato, di norma fino a 30 giorni.</p>
 
-    <h3>6. Modifiche a questa Informativa sulla Privacy</h3>
+    <h3>7. Diritti dell'Utente</h3>
+    <p>Hai il diritto di accedere, modificare o cancellare i tuoi dati personali. Per qualsiasi richiesta relativa ai tuoi dati, puoi contattarci all'indirizzo email fornito in questa informativa. Per eliminare il tuo account e i dati associati, segui le istruzioni nella pagina <a href="delete.html">Eliminazione dell'account</a>.</p>
+
+    <h3>8. Modifiche a questa Informativa sulla Privacy</h3>
     <p>Potremmo aggiornare la nostra Informativa sulla Privacy di tanto in tanto. Ti informeremo di eventuali modifiche pubblicando la nuova informativa su questa pagina. Si consiglia di consultare periodicamente questa pagina per eventuali cambiamenti.</p>
 
 </body>
 </html>
-
-

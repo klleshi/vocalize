@@ -1,76 +1,702 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Vocalize trasforma qualsiasi testo in voce naturale: incolla un testo, importa un file o una pagina web e ascoltalo con voci neurali in 55 lingue. Audiolibri a capitoli e salvataggio MP3. Per Android e iOS.">
+<link rel="canonical" href="https://vocalize.klleshi.com/" />
+<link rel="alternate" hreflang="it" href="https://vocalize.klleshi.com/" />
+<link rel="alternate" hreflang="en" href="https://vocalize.klleshi.com/en/" />
+<link rel="alternate" hreflang="x-default" href="https://vocalize.klleshi.com/" />
+<title>Vocalize — Sintesi vocale</title>
 
-    <!-- Google Serch console -->
-    <link rel="canonical" href="https://vocalize.klleshi.com/" />
-    
-    <title>Vocalize App - Supporto</title>
-    <style>
-        body { 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            margin: 0;
-            padding: 40px;
-            background-color: #f6f8fa;
-            color: #24292e;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: #ffffff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        }
-        h1 {
-            border-bottom: 2px solid #eaecef;
-            padding-bottom: 10px;
-        }
-        a {
-            color: #0366d6;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
-        li {
-            padding: 10px 0;
-            border-bottom: 1px solid #eaecef;
-        }
-        footer {
-            margin-top: 30px;
-            font-size: 0.9em;
-            color: #586069;
-        }
-    </style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg: #10203A;
+    --panel: #16294A;
+    --panel-line: #2C4468;
+    --ink: #F1EEE4;
+    --ink-dim: #C7D0DE;
+    --line: #5D7FA3;
+    --accent: #E2622C;
+    --accent-dim: #B84E23;
+    --good: #4E9B6E;
+    --frame-margin: clamp(14px, 3vw, 34px);
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *{ animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  }
+
+  body{
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3{
+    font-family: "Big Shoulders Display", "IBM Plex Sans", sans-serif;
+    font-weight: 700;
+    line-height: 1.05;
+    margin: 0;
+  }
+
+  a{ color: inherit; }
+  .mono{ font-family: "IBM Plex Mono", monospace; letter-spacing: 0.01em; }
+
+  /* ---------- drafting-sheet frame ---------- */
+
+  .sheet{
+    position: relative;
+    margin: var(--frame-margin);
+    border: 1px solid var(--line);
+  }
+
+  .tick{ position: absolute; width: 16px; height: 16px; pointer-events: none; }
+  .tick::before, .tick::after{ content: ""; position: absolute; background: var(--line); }
+  .tick::before{ width: 100%; height: 1px; top: 50%; left: 0; }
+  .tick::after{ width: 1px; height: 100%; left: 50%; top: 0; }
+  .tick.tl{ top: -8px; left: -8px; }
+  .tick.tr{ top: -8px; right: -8px; }
+  .tick.bl{ bottom: -8px; left: -8px; }
+  .tick.br{ bottom: -8px; right: -8px; }
+
+  /* ---------- top bar ---------- */
+
+  .topbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px clamp(20px, 4vw, 48px);
+    border-bottom: 1px solid var(--panel-line);
+  }
+  .wordmark{
+    font-family: "Big Shoulders Display", sans-serif;
+    font-weight: 700;
+    font-size: 21px;
+    text-decoration: none;
+  }
+  .topnav{ display: flex; align-items: center; gap: clamp(14px, 3vw, 30px); }
+  .topnav a{
+    font-size: 14px;
+    text-decoration: none;
+    color: var(--ink-dim);
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+    transition: color .15s ease, border-color .15s ease;
+  }
+  .topnav a:hover, .topnav a:focus-visible{ color: var(--ink); border-color: var(--accent); }
+  .topnav a.lang{
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12.5px;
+    border: 1px solid var(--panel-line);
+    padding: 3px 8px;
+  }
+  .topnav a.lang:hover, .topnav a.lang:focus-visible{ border-color: var(--accent); }
+
+  /* ---------- hero ---------- */
+
+  .hero{
+    padding: clamp(40px, 7vw, 84px) clamp(20px, 4vw, 48px) clamp(24px, 5vw, 48px);
+    border-bottom: 1px solid var(--panel-line);
+  }
+  .hero-tag{ font-size: 13px; color: var(--line); margin-bottom: 16px; }
+  .hero h1{
+    font-size: clamp(2.1rem, 4.6vw, 3.4rem);
+    max-width: 20ch;
+  }
+  .hero-sub{
+    margin-top: 20px;
+    max-width: 58ch;
+    color: var(--ink-dim);
+    font-size: 17px;
+  }
+
+  .value-list{
+    list-style: none;
+    padding: 0;
+    margin: 30px 0 36px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px 24px;
+    max-width: 900px;
+  }
+  .value-list li{
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 14.5px;
+    color: var(--ink-dim);
+  }
+  .value-list li::before{
+    content: "";
+    width: 6px;
+    height: 6px;
+    margin-top: 7px;
+    background: var(--accent);
+    flex: none;
+  }
+  .value-list strong{ color: var(--ink); display: block; font-weight: 600; }
+
+  .cta-group{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .btn{
+    display: inline-block;
+    font-size: 14px;
+    padding: 13px 22px;
+    border: 1px solid var(--line);
+    text-decoration: none;
+    color: var(--ink);
+    background: transparent;
+    transition: border-color .15s ease, color .15s ease, background .15s ease;
+  }
+  .btn:hover, .btn:focus-visible{ border-color: var(--accent); color: var(--accent); }
+  .btn-primary{
+    border-color: var(--accent);
+    background: var(--accent);
+    color: var(--bg);
+    font-weight: 600;
+  }
+  .btn-primary:hover, .btn-primary:focus-visible{
+    background: var(--accent-dim);
+    border-color: var(--accent-dim);
+    color: var(--bg);
+  }
+  .btn small{ display: block; font-weight: 400; font-size: 11.5px; opacity: .8; margin-top: 2px; }
+
+  /* ---------- screenshots ---------- */
+
+  .shots-wrap{
+    padding: 0 clamp(20px, 4vw, 48px) clamp(48px, 8vw, 84px);
+    border-bottom: 1px solid var(--panel-line);
+  }
+  .shots{
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 260px));
+    justify-content: center;
+    gap: clamp(18px, 3vw, 36px);
+  }
+  .shot figure{ margin: 0; }
+  .shot-frame{
+    position: relative;
+    border: 1px solid var(--line);
+    padding: 8px;
+    background: #0C1930;
+  }
+  .shot-frame .tick{ width: 12px; height: 12px; }
+  .shot-frame .tick::before, .shot-frame .tick::after{ background: var(--accent); }
+  .shot-frame .tick.tl{ top: -6px; left: -6px; }
+  .shot-frame .tick.tr{ top: -6px; right: -6px; }
+  .shot-frame .tick.bl{ bottom: -6px; left: -6px; }
+  .shot-frame .tick.br{ bottom: -6px; right: -6px; }
+  .shot-screen{
+    position: relative;
+    aspect-ratio: 9 / 20;
+    overflow: hidden;
+    background: #0F1F3A;
+  }
+  .shot-screen img{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .video{ max-width: 326px; margin: clamp(36px, 6vw, 60px) auto 0; }
+  .video video{ display: block; width: 100%; height: auto; background: #0C1930; }
+  .video figcaption{ margin-top: 12px; text-align: center; font-size: 12px; color: var(--line); }
+  .shot figcaption{
+    margin-top: 12px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--line);
+  }
+
+  /* ---------- section shell ---------- */
+
+  section{ padding: clamp(40px, 7vw, 80px) clamp(20px, 4vw, 48px); border-bottom: 1px solid var(--panel-line); }
+  section:last-of-type{ border-bottom: none; }
+
+  .section-head{
+    margin-bottom: clamp(28px, 5vw, 44px);
+    border-bottom: 1px solid var(--panel-line);
+    padding-bottom: 18px;
+  }
+  .section-head h2{ font-size: clamp(1.6rem, 3vw, 2.2rem); }
+  .section-head p{ color: var(--ink-dim); margin-top: 10px; max-width: 60ch; font-size: 15px; }
+
+  /* ---------- features ---------- */
+
+  .features{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .feature{
+    border: 1px solid var(--panel-line);
+    background: var(--panel);
+    padding: 20px 20px 22px;
+  }
+  .feature-index{ font-size: 12px; color: var(--accent); }
+  .feature h3{ font-size: 1.25rem; margin-top: 10px; }
+  .feature p{ margin: 10px 0 0; font-size: 14px; color: var(--ink-dim); }
+
+  /* ---------- pricing spec sheet ---------- */
+
+  .pricing{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .plan{
+    border: 1px solid var(--panel-line);
+    background: var(--panel);
+  }
+  .plan-head{
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--panel-line);
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .plan-head h3{ font-size: 1.4rem; }
+  .plan.premium .plan-head{ border-bottom-color: var(--accent-dim); }
+  .plan-price{ font-size: 1.1rem; font-weight: 600; }
+  .plan.premium .plan-price{ color: var(--accent); text-align: right; }
+  .plan-price small{ display: block; font-size: 12.5px; font-weight: 400; color: var(--ink-dim); margin-top: 2px; }
+  .plan dl{
+    padding: 18px 24px 22px;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px 14px;
+    font-size: 14px;
+  }
+  .plan dt{ color: var(--ink-dim); }
+  .plan dd{ margin: 0; text-align: right; font-weight: 500; }
+  .plan dd.yes{ color: var(--good); }
+  .plan dd.no{ color: var(--line); }
+  .plan-note{ padding: 0 24px 22px; margin: 0; font-size: 13px; color: var(--line); }
+  .pricing-note{ margin-top: 18px; font-size: 13.5px; color: var(--ink-dim); max-width: 72ch; }
+
+  /* ---------- changelog ---------- */
+
+  .release{ border: 1px solid var(--panel-line); background: var(--panel); }
+  .release-head{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px 16px;
+    padding: 16px 22px;
+    border-bottom: 1px solid var(--panel-line);
+  }
+  .release-head h3{ font-size: 1.2rem; }
+  .release-status{ font-size: 12px; color: var(--accent); }
+  .release-body{ padding: 4px 22px 24px; }
+  .release-group h4{
+    font-family: "IBM Plex Sans", sans-serif;
+    font-weight: 600;
+    font-size: 13.5px;
+    color: var(--ink);
+    margin: 18px 0 10px;
+  }
+  .changelog-list{ list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+  .changelog-list li{
+    font-size: 14px;
+    color: var(--ink-dim);
+    padding-left: 16px;
+    position: relative;
+  }
+  .changelog-list li::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 6px;
+    height: 6px;
+    background: var(--line);
+  }
+  .changelog-list strong{ color: var(--ink); font-weight: 600; }
+
+  /* ---------- FAQ ---------- */
+
+  .faq{ display: flex; flex-direction: column; gap: 10px; }
+  .faq details{ border: 1px solid var(--panel-line); background: var(--panel); }
+  .faq summary{
+    cursor: pointer;
+    list-style: none;
+    padding: 16px 22px;
+    font-weight: 600;
+    font-size: 15px;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .faq summary::-webkit-details-marker{ display: none; }
+  .faq summary::after{ content: "+"; font-family: "IBM Plex Mono", monospace; color: var(--accent); }
+  .faq details[open] summary::after{ content: "−"; }
+  .faq details[open] summary{ border-bottom: 1px solid var(--panel-line); }
+  .faq .answer{ padding: 14px 22px 18px; font-size: 14.5px; color: var(--ink-dim); }
+  .faq .answer p{ margin: 0 0 10px; max-width: 72ch; }
+  .faq .answer p:last-child{ margin-bottom: 0; }
+  .faq .answer a{ color: var(--accent); text-underline-offset: 3px; }
+  .faq-more{ margin-top: 24px; }
+
+  /* ---------- support / title block ---------- */
+
+  .titleblock{
+    padding: clamp(30px, 6vw, 50px) clamp(20px, 4vw, 48px) clamp(40px, 6vw, 56px);
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 30px;
+    border-bottom: 1px solid var(--panel-line);
+  }
+  .titleblock h2{ font-size: clamp(1.5rem, 3vw, 2rem); }
+  .titleblock p{ color: var(--ink-dim); max-width: 46ch; margin-top: 14px; }
+  .support-email{
+    display: inline-block;
+    margin-top: 16px;
+    font-size: 15px;
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .tb-meta{
+    border-left: 1px solid var(--panel-line);
+    padding-left: 28px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 8px 18px;
+    align-self: start;
+    font-size: 13.5px;
+    margin: 0;
+  }
+  .tb-meta dt{ color: var(--line); }
+  .tb-meta dd{ margin: 0; }
+  .tb-meta a{ text-decoration: underline; text-decoration-color: var(--panel-line); text-underline-offset: 3px; }
+  .tb-meta a:hover, .tb-meta a:focus-visible{ text-decoration-color: var(--accent); color: var(--accent); }
+
+  footer{
+    padding: 22px clamp(20px, 4vw, 48px);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--line);
+  }
+  footer nav{ display: flex; flex-wrap: wrap; gap: 8px 18px; }
+  footer a{ text-decoration: underline; text-decoration-color: var(--panel-line); text-underline-offset: 3px; }
+  footer a:hover, footer a:focus-visible{ text-decoration-color: var(--accent); color: var(--accent); }
+
+  :focus-visible{ outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* ---------- responsive ---------- */
+
+  @media (max-width: 960px){
+    .features{ grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 760px){
+    .value-list{ grid-template-columns: 1fr 1fr; }
+    .pricing{ grid-template-columns: 1fr; }
+    .titleblock{ grid-template-columns: 1fr; }
+    .tb-meta{ border-left: none; padding-left: 0; border-top: 1px solid var(--panel-line); padding-top: 20px; }
+    .shots{ grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  }
+  @media (max-width: 560px){
+    .topnav a:not(.lang){ display: none; }
+    .value-list{ grid-template-columns: 1fr; }
+    .features{ grid-template-columns: 1fr; }
+    .shots{ grid-template-columns: minmax(0, 240px); }
+  }
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1>Vocalize App</h1>
-        <p>Benvenuto nel centro di supporto e documentazione di Vocalize.</p>
-        <p>Welcome to the Vocalize app support and documentation hub.</p>
 
-        <h2>Documenti Legali / Legal Documents</h2>
-        <ul>
-            <li><a href="it/privacy.html">Informativa sulla Privacy (Italiano)</a></li>
-            <li><a href="it/terms.html">Termini di Servizio (Italiano)</a></li>
-            <li><a href="en/privacy.html">Privacy Policy (English)</a></li>
-            <li><a href="en/terms.html">Terms of Service (English)</a></li>
-        </ul>
+<div class="sheet">
+  <span class="tick tl"></span><span class="tick tr"></span>
+  <span class="tick bl"></span><span class="tick br"></span>
 
-        <h2>Supporto / Support</h2>
-        <p>Per richieste di supporto o per l'eliminazione dell'account, contattaci:</p>
-        <p><a href="mailto:klleshi99@gmail.com">klleshi99@gmail.com</a></p>
+  <header class="topbar">
+    <a class="wordmark" href="#top">Vocalize</a>
+    <nav class="topnav" aria-label="Navigazione">
+      <a href="#funzioni">Funzioni</a>
+      <a href="#piani">Piani</a>
+      <a href="faq.html">FAQ</a>
+      <a href="#supporto">Supporto</a>
+      <a class="lang" href="en/" hreflang="en" lang="en">EN</a>
+    </nav>
+  </header>
 
-        <footer>
-            <p>&copy; 2025 Vocalize</p>
-        </footer>
+  <section class="hero" id="top">
+    <p class="hero-tag mono">Sintesi vocale — Android e iOS</p>
+    <h1>Trasforma qualsiasi testo in voce naturale.</h1>
+    <p class="hero-sub">Incolla un testo, importa un file o una pagina web e ascoltalo con voci neurali in decine di lingue. Salvalo in MP3 o raccogli i capitoli in un audiolibro da ascoltare quando vuoi.</p>
+
+    <ul class="value-list">
+      <li><span><strong>55 lingue, 358 voci</strong>dalle voci Standard alle voci Studio in alta definizione.</span></li>
+      <li><span><strong>Testi, PDF e pagine web</strong>incolla, importa un file TXT o PDF, oppure un link.</span></li>
+      <li><span><strong>MP3 e audiolibri</strong>salva l'audio e organizzalo in capitoli.</span></li>
+    </ul>
+
+    <div class="cta-group">
+      <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=io.github.klleshi.vocalize">Scarica su Google Play<small>Android</small></a>
+      <a class="btn" href="https://apps.apple.com/app/id6757393059">Scarica sull'App Store<small>iPhone e iPad</small></a>
     </div>
+  </section>
+
+  <div class="shots-wrap">
+    <div class="shots">
+      <div class="shot">
+        <figure>
+          <div class="shot-frame">
+            <span class="tick tl"></span><span class="tick tr"></span>
+            <span class="tick bl"></span><span class="tick br"></span>
+            <div class="shot-screen">
+              <img src="screenshots/home.jpg" alt="Schermata principale di Vocalize con il testo da leggere e la scelta della voce" width="1080" height="2400" loading="lazy">
+            </div>
+          </div>
+          <figcaption class="mono">Testo e scelta della voce</figcaption>
+        </figure>
+      </div>
+      <div class="shot">
+        <figure>
+          <div class="shot-frame">
+            <span class="tick tl"></span><span class="tick tr"></span>
+            <span class="tick bl"></span><span class="tick br"></span>
+            <div class="shot-screen">
+              <img src="screenshots/playing_file_audio.jpg" alt="Lettore audio di Vocalize durante la riproduzione di un file salvato" width="1080" height="2400" loading="lazy">
+            </div>
+          </div>
+          <figcaption class="mono">Lettore e timer di spegnimento</figcaption>
+        </figure>
+      </div>
+      <div class="shot">
+        <figure>
+          <div class="shot-frame">
+            <span class="tick tl"></span><span class="tick tr"></span>
+            <span class="tick bl"></span><span class="tick br"></span>
+            <div class="shot-screen">
+              <img src="screenshots/premium.jpg" alt="Pagina Premium di Vocalize con il saldo dei crediti" width="1080" height="2400" loading="lazy">
+            </div>
+          </div>
+          <figcaption class="mono">Piano e crediti</figcaption>
+        </figure>
+      </div>
+    </div>
+    <figure class="video">
+      <div class="shot-frame">
+        <span class="tick tl"></span><span class="tick tr"></span>
+        <span class="tick bl"></span><span class="tick br"></span>
+        <video controls playsinline preload="none" poster="screenshots/home.jpg" width="326" height="666">
+          <source src="screenshots/vocalize_video.mp4" type="video/mp4">
+        </video>
+      </div>
+      <figcaption class="mono">Vocalize in 4 minuti</figcaption>
+    </figure>
+  </div>
+
+  <section id="funzioni">
+    <div class="section-head">
+      <h2>Cosa puoi fare</h2>
+      <p>Tutto quello che serve per ascoltare i tuoi testi invece di leggerli: articoli, documenti, appunti, libri.</p>
+    </div>
+
+    <div class="features">
+      <article class="feature">
+        <span class="feature-index mono">01</span>
+        <h3>Incolla e ascolta</h3>
+        <p>Scrivi o incolla un testo di qualsiasi lunghezza: i testi lunghi vengono letti a blocchi, senza attese.</p>
+      </article>
+      <article class="feature">
+        <span class="feature-index mono">02</span>
+        <h3>File e pagine web</h3>
+        <p>Importa un file TXT o PDF, oppure il link di una pagina web: Vocalize ne estrae il testo da leggere.</p>
+      </article>
+      <article class="feature">
+        <span class="feature-index mono">03</span>
+        <h3>Lingua automatica</h3>
+        <p>Riconosce la lingua del testo e seleziona da sola la lingua di lettura giusta.</p>
+      </article>
+      <article class="feature">
+        <span class="feature-index mono">04</span>
+        <h3>Voci naturali</h3>
+        <p>Voci Standard, WaveNet, Neural2 e Studio in alta definizione, in 55 lingue e varianti.</p>
+      </article>
+      <article class="feature">
+        <span class="feature-index mono">05</span>
+        <h3>Velocità, tono, volume</h3>
+        <p>Regola il ritmo e il tono della voce e il volume di riproduzione come preferisci.</p>
+      </article>
+      <article class="feature">
+        <span class="feature-index mono">06</span>
+        <h3>Audiolibri a capitoli</h3>
+        <p>Raccogli gli audio salvati in un audiolibro con copertina e capitoli, e riprendi da dove avevi lasciato.</p>
+      </article>
+      <article class="feature">
+        <span class="feature-index mono">07</span>
+        <h3>Salvataggio MP3</h3>
+        <p>Salva l'audio sul telefono, rinominalo e condividilo con altre app.</p>
+      </article>
+      <article class="feature">
+        <span class="feature-index mono">08</span>
+        <h3>Timer di spegnimento</h3>
+        <p>Ascolta a letto: la riproduzione si ferma da sola dopo il tempo che scegli.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="piani">
+    <div class="section-head">
+      <h2>Gratis e Premium</h2>
+      <p>La sintesi consuma crediti in base alla lunghezza del testo e al tipo di voce. Ogni mese il saldo torna al massimo del tuo piano.</p>
+    </div>
+
+    <div class="pricing">
+      <div class="plan">
+        <div class="plan-head">
+          <h3>Gratis</h3>
+          <span class="plan-price">0 €</span>
+        </div>
+        <dl>
+          <dt>Crediti al mese</dt><dd>200.000</dd>
+          <dt>Voci Standard e WaveNet</dt><dd class="yes">Incluse</dd>
+          <dt>Voci Neural2 e Studio</dt><dd>25.000 crediti di prova</dd>
+          <dt>Audiolibri</dt><dd>1</dd>
+          <dt>Pubblicità</dt><dd>Sì</dd>
+        </dl>
+      </div>
+
+      <div class="plan premium">
+        <div class="plan-head">
+          <h3>Premium</h3>
+          <span class="plan-price">4,99 € / mese<small>oppure 49,99 € / anno</small></span>
+        </div>
+        <dl>
+          <dt>Crediti al mese</dt><dd class="yes">800.000</dd>
+          <dt>Voci Standard e WaveNet</dt><dd class="yes">Incluse</dd>
+          <dt>Voci Neural2 e Studio</dt><dd class="yes">Incluse</dd>
+          <dt>Audiolibri</dt><dd class="yes">Illimitati</dd>
+          <dt>Pubblicità</dt><dd class="yes">Nessuna</dd>
+        </dl>
+        <p class="plan-note">Abbonamento mensile o annuale, gestito da Google Play o dall'App Store.</p>
+      </div>
+    </div>
+    <p class="pricing-note">Prezzi per l'Italia, IVA inclusa. In altri paesi lo store mostra il prezzo nella valuta locale. Abbonamento con rinnovo automatico, disdicibile in qualsiasi momento dallo store. I crediti non usati non si accumulano da un mese all'altro.</p>
+  </section>
+
+  <section id="novita">
+    <div class="section-head">
+      <h2>Novità della versione 1.2.5</h2>
+    </div>
+
+    <article class="release">
+      <div class="release-head">
+        <h3>v1.2.5</h3>
+        <span class="release-status">Ultimo aggiornamento</span>
+      </div>
+      <div class="release-body">
+        <div class="release-group">
+          <h4>Novità</h4>
+          <ul class="changelog-list">
+            <li><strong>Riconoscimento automatico della lingua.</strong> Incolla o scrivi un testo e Vocalize seleziona da solo la lingua giusta per la lettura.</li>
+            <li><strong>Testi lunghi più comodi.</strong> Se i crediti non bastano per tutto il testo puoi ascoltarne una parte, e dopo un'interruzione puoi salvare l'audio già creato. Rileggendo lo stesso testo, le parti già generate non consumano altri crediti.</li>
+          </ul>
+        </div>
+        <div class="release-group">
+          <h4>Correzioni</h4>
+          <ul class="changelog-list">
+            <li><strong>Crediti.</strong> Risolto il problema per cui i crediti potevano risultare a zero all'avvio.</li>
+            <li><strong>Connessione.</strong> Se manca la rete, la pagina Premium lo segnala e permette di riprovare.</li>
+            <li><strong>Stabilità.</strong> Abbonamenti più affidabili e miglioramenti di sicurezza.</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section id="faq">
+    <div class="section-head">
+      <h2>Domande frequenti</h2>
+      <p>Le domande più comuni. Guide passo passo e tutte le altre risposte sono nella pagina dedicata.</p>
+    </div>
+
+    <div class="faq">
+      <details>
+        <summary>Come funzionano i crediti?</summary>
+        <div class="answer">
+          <p>Ogni lettura consuma crediti in base al numero di caratteri del testo e al tipo di voce: le voci Standard e WaveNet costano meno, le voci Neural2 e Studio di più. Il saldo è visibile nella scheda Premium dell'app.</p>
+          <p>Ogni mese, nel giorno in cui hai iniziato a usare l'app, il saldo torna al massimo del tuo piano. Per un uso equo c'è anche un limite giornaliero.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Come ripristino il mio abbonamento su un nuovo telefono?</summary>
+        <div class="answer">
+          <p>Installa Vocalize, accedi con lo stesso account Google o Apple usato per l'abbonamento (scheda Premium → "Salva i tuoi crediti") e tocca "Ripristina Acquisti".</p>
+        </div>
+      </details>
+      <details>
+        <summary>Come elimino il mio account e i miei dati?</summary>
+        <div class="answer">
+          <p>Scrivi a <a href="mailto:klleshi99@gmail.com?subject=Richiesta%20Eliminazione%20Account%20Vocalize">klleshi99@gmail.com</a> dall'indirizzo collegato all'account, o indica il modo in cui accedi all'app. Account e dati vengono eliminati entro 30 giorni. I dettagli sono nella pagina <a href="it/delete.html">Eliminazione dell'account</a>.</p>
+          <p>Gli audio e gli audiolibri salvati restano solo sul tuo telefono: si cancellano disinstallando l'app.</p>
+        </div>
+      </details>
+    </div>
+    <div class="faq-more">
+      <a class="btn" href="faq.html">Tutte le guide e le domande frequenti →</a>
+    </div>
+  </section>
+
+  <section class="titleblock" id="supporto">
+    <div>
+      <h2>Supporto</h2>
+      <p>Un problema con i crediti, un acquisto che non si attiva o una voce che non funziona? Scrivimi direttamente: rispondo personalmente a ogni messaggio.</p>
+      <a class="support-email mono" href="mailto:klleshi99@gmail.com">klleshi99@gmail.com</a>
+    </div>
+    <dl class="tb-meta">
+      <dt>Privacy</dt>
+      <dd><a href="it/privacy.html">Informativa sulla privacy</a></dd>
+      <dt>Termini</dt>
+      <dd><a href="it/terms.html">Termini di servizio</a></dd>
+      <dt>Account</dt>
+      <dd><a href="it/delete.html">Eliminazione dell'account</a></dd>
+      <dt>Guide</dt>
+      <dd><a href="faq.html">Guide e domande frequenti</a></dd>
+      <dt>English</dt>
+      <dd><a href="en/" hreflang="en" lang="en">Vocalize in English</a></dd>
+    </dl>
+  </section>
+
+  <footer>
+    <span>&copy; 2026 Vocalize</span>
+    <nav aria-label="Documenti">
+      <a href="it/privacy.html">Privacy</a>
+      <a href="it/terms.html">Termini</a>
+      <a href="it/delete.html">Eliminazione account</a>
+    </nav>
+    <span>Un progetto di <a href="https://klleshi.com/">Kastriot Lleshi</a></span>
+  </footer>
+</div>
+
 </body>
 </html>
